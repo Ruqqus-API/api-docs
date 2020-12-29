@@ -1,8 +1,8 @@
 openapi: 3.0.0
 info:
-  title: ruqqus
+  title: Ruqqus
   version: '1.0'
-  description: ''
+  description: 'The initial version of the Ruqqus API, in support of user-authorized Applications.'
   termsOfService: 'https://ruqqus.com/help/terms'
   contact:
     url: 'https://ruqqus.com/help/contact'
@@ -1459,7 +1459,6 @@ paths:
         name: name
         in: path
         required: true
-        description: Guild name
 components:
   schemas:
     User:
