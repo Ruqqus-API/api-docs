@@ -1474,7 +1474,7 @@ paths:
         required: true
         description: Post ID
     post:
-      summary: '/mod/take/{pid}'
+      summary: 'mod/take/{pid}'
       operationId: post-mod-take-pid
       responses:
         '200':
