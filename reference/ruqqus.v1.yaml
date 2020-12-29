@@ -2446,11 +2446,6 @@ components:
       name: Bearer Token
       description: |
         Token for accessing `/api/v1` endpoint
-    API Key - 1:
-      name: API Key
-      type: apiKey
-      in: query
-      description: ''
   responses:
     401-Not-Authorized:
       description: '401'
@@ -2494,4 +2489,4 @@ components:
                 error: 403 Forbidden. The application app_name is suspended.
 security:
   - OAuth2: []
-  - Token: []
+  - Access Token: []
