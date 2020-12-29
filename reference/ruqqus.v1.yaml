@@ -1496,6 +1496,12 @@ paths:
                 Invalid or Expired Token:
                   value:
                     error: 401 Not Authorized. Invalid or Expired Token
+                GM Recent yank:
+                  value:
+                    error: You've yanked a post recently. You need to wait 1 hour between yanks.
+                Guild Recent yank:
+                  value:
+                    error: +guild_name has yanked a post recently. The Guild needs to wait 1 hour between yanks.
         '404':
           description: Not Found
           content:
