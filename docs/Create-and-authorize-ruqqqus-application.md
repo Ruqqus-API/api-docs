@@ -17,7 +17,7 @@ Ruqqus administrators will review and approve or deny your request for API keys.
 
 DO NOT reveal your Client Secret. Anyone with your Client Secret will be able to pretend to be you. You are responsible for keeping your Client Secret a secret!
 
-![](../assets/images/app.png)
+![](https://github.com/Ruqqus-API/api-docs/blob/main/assets/images/app.png?raw=true)
 
 
 ## Step 2: Prompt Your User for Authorization
