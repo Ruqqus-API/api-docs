@@ -2471,4 +2471,4 @@ components:
                 error: 403 Forbidden. The application app_name is suspended.
 security:
   - OAuth2: []
-  - Token: []
+  - Access Token: []
