@@ -13,9 +13,9 @@ info:
 servers:
   - url: 'https://ruqqus.com/api/v1/'
 paths:
-  '/board_available/{name}':
+  'board_available/{name}':
     get:
-      summary: /board_available/<name>
+      summary: 'board_available/{name}'
       tags: []
       operationId: get-board_available-name
       description: Checks if the guild name is availabile (not an existing guild)
@@ -50,6 +50,9 @@ paths:
           $ref: '#/components/responses/401-Not-Authorized'
         '403':
           $ref: '#/components/responses/403-Forbidden'
+      security:
+        - OAuth2:
+            - read
     parameters:
       - schema:
           type: string
@@ -57,9 +60,9 @@ paths:
         in: path
         description: Guild name
         required: true
-  '/api/v1/guild/{name}/listing/':
+  'guild/{name}/listing':
     get:
-      summary: /guild/<name>/listing
+      summary: 'guild/{name}/listing'
       tags: []
       operationId: get-api-v1-guild-name-listing
       description: ''
@@ -1453,13 +1456,16 @@ paths:
         '403':
           $ref: '#/components/responses/403-Forbidden'
       parameters: []
+      security:
+        - OAuth2:
+            - read
     parameters:
       - schema:
           type: string
         name: name
         in: path
         required: true
-  '/mod/take/{pid}':
+  'mod/take/{pid}':
     parameters:
       - schema:
           type: string
@@ -1468,7 +1474,7 @@ paths:
         required: true
         description: Post ID
     post:
-      summary: ''
+      summary: 'mod/take/{pid}'
       operationId: post-mod-take-pid
       responses:
         '200':
@@ -2437,7 +2443,14 @@ components:
         authorizationCode:
           authorizationUrl: ''
           tokenUrl: ''
-          scopes: {}
+          scopes:
+            identity: Allows the application to access the user's information
+            create: Allows the application to submit items through the user
+            read: Allows the application to request information about site objects
+            update: Allows the application to update already-created submissions
+            delete: Allows the application to delete submissions created by the user
+            vote: Allows the application to vote on submissions through the user
+            guildmaster: Allows the application to perform guildmaster actions through the user
       description: |
         OAuth2 flow for obtaining API application keys
     Access Token:
