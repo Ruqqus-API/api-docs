@@ -2422,9 +2422,7 @@ components:
           scopes: {}
       description: |
         OAuth2 flow for obtaining API application keys
-
-        Go to https://ruqqus.com/help/oauth to see official documentation on that
-    Token:
+    Access Token:
       type: apiKey
       in: header
       name: Bearer Token
@@ -2434,6 +2432,7 @@ components:
       name: API Key
       type: apiKey
       in: query
+      description: ''
   responses:
     401-Not-Authorized:
       description: '401'
