@@ -1,0 +1,2481 @@
+openapi: 3.0.0
+info:
+  title: ruqqus
+  version: '1.0'
+  description: ''
+  termsOfService: 'https://ruqqus.com/help/terms'
+  contact:
+    url: 'https://ruqqus.com/help/contact'
+    name: Ruqqus
+  license:
+    name: Mozilla Public License 2.0
+    url: 'https://github.com/ruqqus/ruqqus/blob/master/LICENSE'
+servers:
+  - url: 'https://ruqqus.com/api/v1/'
+paths:
+  '/board_available/{name}':
+    get:
+      summary: /board_available/<name>
+      tags: []
+      operationId: get-board_available-name
+      description: Checks if the guild name is availabile (not an existing guild)
+      parameters: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                description: ''
+                type: object
+                properties:
+                  available:
+                    type: boolean
+                  board:
+                    type: string
+                    minLength: 1
+                required:
+                  - available
+                  - board
+              examples:
+                Not Available:
+                  value:
+                    available: false
+                    board: ruqqus
+                Available:
+                  value:
+                    available: true
+                    board: ThisNameIsAvailable
+        '401':
+          $ref: '#/components/responses/401-Not-Authorized'
+        '403':
+          $ref: '#/components/responses/403-Forbidden'
+    parameters:
+      - schema:
+          type: string
+        name: name
+        in: path
+        description: Guild name
+        required: true
+  '/api/v1/guild/{name}/listing/':
+    get:
+      summary: /guild/<name>/listing
+      tags: []
+      operationId: get-api-v1-guild-name-listing
+      description: ''
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                description: ''
+                type: object
+                properties:
+                  data:
+                    type: array
+                    uniqueItems: true
+                    minItems: 1
+                    items:
+                      required:
+                        - author_name
+                        - award_count
+                        - body
+                        - body_html
+                        - comment_count
+                        - created_utc
+                        - domain
+                        - downvotes
+                        - edited_utc
+                        - fullname
+                        - guild_name
+                        - id
+                        - is_archived
+                        - is_banned
+                        - is_deleted
+                        - is_nsfl
+                        - is_nsfw
+                        - is_offensive
+                        - is_politics
+                        - permalink
+                        - score
+                        - title
+                        - upvotes
+                        - url
+                        - voted
+                      properties:
+                        author:
+                          type: object
+                          properties:
+                            banner_url:
+                              type: string
+                              minLength: 1
+                            bio:
+                              type: string
+                              minLength: 1
+                            bio_html:
+                              type: string
+                              minLength: 1
+                            created_utc:
+                              type: number
+                            id:
+                              type: string
+                              minLength: 1
+                            is_banned:
+                              type: boolean
+                            is_premium:
+                              type: boolean
+                            is_private:
+                              type: boolean
+                            permalink:
+                              type: string
+                              minLength: 1
+                            profile_url:
+                              type: string
+                              minLength: 1
+                            title:
+                              type: object
+                              properties:
+                                color:
+                                  type: string
+                                  minLength: 1
+                                id:
+                                  type: number
+                                kind:
+                                  type: number
+                                text:
+                                  type: string
+                                  minLength: 1
+                              required:
+                                - color
+                                - id
+                                - kind
+                                - text
+                            username:
+                              type: string
+                              minLength: 1
+                          required:
+                            - banner_url
+                            - bio
+                            - bio_html
+                            - created_utc
+                            - id
+                            - is_banned
+                            - is_premium
+                            - is_private
+                            - permalink
+                            - profile_url
+                            - title
+                            - username
+                        author_name:
+                          type: string
+                          minLength: 1
+                        award_count:
+                          type: number
+                        body:
+                          type: string
+                          minLength: 1
+                        body_html:
+                          type: string
+                          minLength: 1
+                        comment_count:
+                          type: number
+                        created_utc:
+                          type: number
+                        domain:
+                          type: string
+                          minLength: 1
+                        downvotes:
+                          type: number
+                        edited_utc:
+                          type: number
+                        fullname:
+                          type: string
+                          minLength: 1
+                        guild:
+                          type: object
+                          properties:
+                            banner_url:
+                              type: string
+                              minLength: 1
+                            color:
+                              type: string
+                              minLength: 1
+                            created_utc:
+                              type: number
+                            description:
+                              type: string
+                              minLength: 1
+                            description_html:
+                              type: string
+                              minLength: 1
+                            fullname:
+                              type: string
+                              minLength: 1
+                            id:
+                              type: string
+                              minLength: 1
+                            is_banned:
+                              type: boolean
+                            is_private:
+                              type: boolean
+                            is_restricted:
+                              type: boolean
+                            is_siege_protected:
+                              type: boolean
+                            name:
+                              type: string
+                              minLength: 1
+                            over_18:
+                              type: boolean
+                            permalink:
+                              type: string
+                              minLength: 1
+                            profile_url:
+                              type: string
+                              minLength: 1
+                          required:
+                            - banner_url
+                            - color
+                            - created_utc
+                            - description
+                            - description_html
+                            - fullname
+                            - id
+                            - is_banned
+                            - is_private
+                            - is_restricted
+                            - is_siege_protected
+                            - name
+                            - over_18
+                            - permalink
+                            - profile_url
+                        guild_name:
+                          type: string
+                          minLength: 1
+                        id:
+                          type: string
+                          minLength: 1
+                        is_archived:
+                          type: boolean
+                        is_banned:
+                          type: boolean
+                        is_deleted:
+                          type: boolean
+                        is_nsfl:
+                          type: boolean
+                        is_nsfw:
+                          type: boolean
+                        is_offensive:
+                          type: boolean
+                        is_politics:
+                          type: boolean
+                        original_guild: {}
+                        original_guild_name: {}
+                        permalink:
+                          type: string
+                          minLength: 1
+                        score:
+                          type: number
+                        thumb_url: {}
+                        title:
+                          type: string
+                          minLength: 1
+                        upvotes:
+                          type: number
+                        url:
+                          type: string
+                        voted:
+                          type: number
+                  next_exists:
+                    type: boolean
+                required:
+                  - data
+                  - next_exists
+              examples:
+                example:
+                  value:
+                    data:
+                      - author:
+                          banner_url: 'https://i.ruqqus.com/users/movie/banner-1.png'
+                          bio: 'Made [Android App](https://play.google.com/store/apps/details?id=com.ruqqus),  [AutoAuth for ruqqus](https://ruqqus-auth.glitch.me) and @xkcdBot'
+                          bio_html: |
+                            <p>Made <a href="https://play.google.com/store/apps/details?id=com.ruqqus" rel="nofollow noopener" target="_blank">Android App</a>,  <a href="https://ruqqus-auth.glitch.me" rel="nofollow noopener" target="_blank">AutoAuth for ruqqus</a> and <a href="/@xkcdBot"><img class="profile-pic-20 mr-1" src="/@xkcdBot/pic/profile"/>@xkcdBot</a></p>
+                          created_utc: 1591950297
+                          id: 5ar
+                          is_banned: false
+                          is_premium: false
+                          is_private: false
+                          permalink: /@movie
+                          profile_url: 'https://i.ruqqus.com/users/movie/profile-3.png'
+                          title:
+                            color: '#666666'
+                            id: 16
+                            kind: 3
+                            text: ' the Spymaster'
+                          username: movie
+                        author_name: movie
+                        award_count: 0
+                        body: "Currently there is no official documentation for Ruqqus API but there is unofficial one by @SuperLeaf1995  https://ruqq.us/36v6, and there is a help page on how to get started with the api: https://ruqqus.com/help/oauth   \r\n\r\nYou can search through [Ruqqus's GitHub page](https://github.com/ruqqus/ruqqus) to find all of the routes.  \r\n\r\nMore specifically: https://github.com/ruqqus/ruqqus/tree/master/ruqqus/routes    \r\n\r\n<hr>   \r\n\r\nIf you wan't to get started making bots check out [ruqqus-js](https://www.npmjs.com/package/ruqqus-js) by @acikek  \r\nIf you are having trouble getting `access token` check out [AutoAuth for ruqqus](https://ruqqus-auth.glitch.me)\r\n\r\n"
+                        body_html: |
+                          <p>Currently there is no official documentation for Ruqqus API but there is unofficial one by <a href="/@SuperLeaf1995"><img class="profile-pic-20 mr-1" src="/@SuperLeaf1995/pic/profile"/>@SuperLeaf1995</a> <a href="https://ruqq.us/36v6">https://ruqq.us/36v6</a>, and there is a help page on how to get started with the api: <a href="https://ruqqus.com/help/oauth">https://ruqqus.com/help/oauth</a></p>
+                          <p>You can search through <a href="https://github.com/ruqqus/ruqqus" rel="nofollow noopener" target="_blank">Ruqqus's GitHub page</a> to find all of the routes.</p>
+                          <p>More specifically: <a href="https://github.com/ruqqus/ruqqus/tree/master/ruqqus/routes" rel="nofollow noopener" target="_blank">https://github.com/ruqqus/ruqqus/tree/master/ruqqus/routes</a></p>
+                          <hr/>
+                          <p>If you wan't to get started making bots check out <a href="https://www.npmjs.com/package/ruqqus-js" rel="nofollow noopener" target="_blank">ruqqus-js</a> by <a href="/@acikek"><img class="profile-pic-20 mr-1" src="/@acikek/pic/profile"/>@acikek</a>  
+                          If you are having trouble getting <code>access token</code> check out <a href="https://ruqqus-auth.glitch.me" rel="nofollow noopener" target="_blank">AutoAuth for ruqqus</a></p>
+                        comment_count: 7
+                        created_utc: 1598950552
+                        domain: text post
+                        downvotes: 0
+                        edited_utc: 1605778377
+                        fullname: t2_2v0b
+                        guild:
+                          banner_url: 'https://i.ruqqus.com/board/ruqqusapi/banner-3.png'
+                          color: '#2A96F3'
+                          created_utc: 1598948139
+                          description: 'A place to discuss Ruqqus API, ask questions and post "500 (Internal server error)" memes'
+                          description_html: |
+                            <p>A place to discuss Ruqqus API, ask questions and post "500 (Internal server error)" memes</p>
+                          fullname: t4_3my
+                          id: 3my
+                          is_banned: false
+                          is_private: false
+                          is_restricted: false
+                          is_siege_protected: false
+                          name: RuqqusAPI
+                          over_18: false
+                          permalink: /+RuqqusAPI
+                          profile_url: 'https://i.ruqqus.com/board/ruqqusapi/profile-2.png'
+                        guild_name: RuqqusAPI
+                        id: 2v0b
+                        is_archived: false
+                        is_banned: false
+                        is_deleted: false
+                        is_nsfl: false
+                        is_nsfw: false
+                        is_offensive: false
+                        is_politics: false
+                        original_guild: null
+                        original_guild_name: null
+                        permalink: /+RuqqusAPI/post/2v0b/how-to-get-started-using-ruqqus
+                        score: 9
+                        thumb_url: null
+                        title: How to get started using Ruqqus API
+                        upvotes: 9
+                        url: ''
+                        voted: 1
+                      - author:
+                          banner_url: 'https://i.ruqqus.com/users/acikek/banner-1.png'
+                          bio: "<ol>\r\n  <li> </li>\r\n  <li> </li>\r\n  <li> </li>\r\n  <li> </li>\r\n  <li> </li>\r\n  <li> </li>\r\n  <li> </li>\r\n  <li><b><a href=\"https://ruqqus.com/signup?ref=acikek\">acikek</a></b></li>\r\n  <li> </li>\r\n  <li>Author of ruqqus-js • @Multipurpose</li>"
+                          bio_html: |-
+                            <ol>
+                            <li> </li>
+                            <li> </li>
+                            <li> </li>
+                            <li> </li>
+                            <li> </li>
+                            <li> </li>
+                            <li> </li>
+                            <li><b><a href="https://ruqqus.com/signup?ref=acikek">acikek</a></b></li>
+                            <li> </li>
+                            <li>Author of ruqqus-js • @Multipurpose</li>
+                            </ol>
+                          created_utc: 1582741873
+                          id: pi
+                          is_banned: false
+                          is_premium: true
+                          is_private: false
+                          permalink: /@acikek
+                          profile_url: 'https://i.ruqqus.com/users/acikek/profile-1.png'
+                          title:
+                            color: '#5555dd'
+                            id: 40
+                            kind: 3
+                            text: ' the Test Dummy'
+                          username: acikek
+                        author_name: acikek
+                        award_count: 0
+                        body: "If you are interested in making a Ruqqus bot, an API wrapper, or are looking for support for either of those, or even just want to learn the Ruqqus API in general, this is the place for you. \r\n\r\n[Discord Invite](https://discord.gg/GWRutXB)"
+                        body_html: |
+                          <p>If you are interested in making a Ruqqus bot, an API wrapper, or are looking for support for either of those, or even just want to learn the Ruqqus API in general, this is the place for you.</p>
+                          <p><a href="https://discord.gg/GWRutXB" rel="nofollow noopener" target="_blank">Discord Invite</a></p>
+                        comment_count: 3
+                        created_utc: 1600908899
+                        domain: discord.gg
+                        downvotes: 0
+                        edited_utc: 0
+                        fullname: t2_3hsi
+                        guild:
+                          banner_url: 'https://i.ruqqus.com/board/ruqqusapi/banner-3.png'
+                          color: '#2A96F3'
+                          created_utc: 1598948139
+                          description: 'A place to discuss Ruqqus API, ask questions and post "500 (Internal server error)" memes'
+                          description_html: |
+                            <p>A place to discuss Ruqqus API, ask questions and post "500 (Internal server error)" memes</p>
+                          fullname: t4_3my
+                          id: 3my
+                          is_banned: false
+                          is_private: false
+                          is_restricted: false
+                          is_siege_protected: false
+                          name: RuqqusAPI
+                          over_18: false
+                          permalink: /+RuqqusAPI
+                          profile_url: 'https://i.ruqqus.com/board/ruqqusapi/profile-2.png'
+                        guild_name: RuqqusAPI
+                        id: 3hsi
+                        is_archived: false
+                        is_banned: false
+                        is_deleted: false
+                        is_nsfl: false
+                        is_nsfw: false
+                        is_offensive: false
+                        is_politics: false
+                        original_guild: null
+                        original_guild_name: null
+                        permalink: /+RuqqusAPI/post/3hsi/ruqqus-api-discussion-discord-server
+                        score: 10
+                        thumb_url: 'https://i.ruqqus.com/posts/3hsi/thumb.png'
+                        title: Ruqqus API Discussion Discord Server
+                        upvotes: 11
+                        url: 'https://discord.gg/GWRutXB'
+                        voted: 1
+                      - author:
+                          banner_url: 'https://i.ruqqus.com/users/movie/banner-1.png'
+                          bio: 'Made [Android App](https://play.google.com/store/apps/details?id=com.ruqqus),  [AutoAuth for ruqqus](https://ruqqus-auth.glitch.me) and @xkcdBot'
+                          bio_html: |
+                            <p>Made <a href="https://play.google.com/store/apps/details?id=com.ruqqus" rel="nofollow noopener" target="_blank">Android App</a>,  <a href="https://ruqqus-auth.glitch.me" rel="nofollow noopener" target="_blank">AutoAuth for ruqqus</a> and <a href="/@xkcdBot"><img class="profile-pic-20 mr-1" src="/@xkcdBot/pic/profile"/>@xkcdBot</a></p>
+                          created_utc: 1591950297
+                          id: 5ar
+                          is_banned: false
+                          is_premium: false
+                          is_private: false
+                          permalink: /@movie
+                          profile_url: 'https://i.ruqqus.com/users/movie/profile-3.png'
+                          title:
+                            color: '#666666'
+                            id: 16
+                            kind: 3
+                            text: ' the Spymaster'
+                          username: movie
+                        author_name: movie
+                        award_count: 0
+                        body: "![](https://i.imgur.com/cJjjVKC.jpg)   \r\n<hr>        \r\n\r\n### Introducing - AutoAuth for ruqqus     \r\n* Fast and automatic way to get ruqqus access token for developing or testing purposes    \r\n* None of the data is logged, and all of the temporary data (app state...) gets deleted with user session, so there is no way for anyone to see any of the private data.    \r\n* The app code is open source on GitHub, and the app gets build from it \r\n\r\n\r\nGo check it out!  \r\nhttps://ruqqus-auth.glitch.me/  "
+                        body_html: |
+                          <p><a data-target="#expandImageModal" data-toggle="modal" href="https://i.imgur.com/cJjjVKC.jpg" onclick="expandDesktopImage('https://i.imgur.com/cJjjVKC.jpg');" rel="nofollow noopener" target="_blank"><img class="in-comment-image rounded-sm my-2" rel="nofollow" src="https://i.imgur.com/cJjjVKC.jpg" style="max-height: 100px; max-width: 100%;"/></a></p>
+                          <hr/>
+                          <h3>Introducing - AutoAuth for ruqqus</h3>
+                          <ul>
+                          <li>Fast and automatic way to get ruqqus access token for developing or testing purposes</li>
+                          <li>None of the data is logged, and all of the temporary data (app state...) gets deleted with user session, so there is no way for anyone to see any of the private data.</li>
+                          <li>The app code is open source on GitHub, and the app gets build from it</li>
+                          </ul>
+                          <p>Go check it out!  
+                          <a href="https://ruqqus-auth.glitch.me/" rel="nofollow noopener" target="_blank">https://ruqqus-auth.glitch.me/</a></p>
+                        comment_count: 1
+                        created_utc: 1605697276
+                        domain: ruqqus-auth.glitch.me
+                        downvotes: 0
+                        edited_utc: 1605697504
+                        fullname: t2_4z8h
+                        guild:
+                          banner_url: 'https://i.ruqqus.com/board/ruqqusapi/banner-3.png'
+                          color: '#2A96F3'
+                          created_utc: 1598948139
+                          description: 'A place to discuss Ruqqus API, ask questions and post "500 (Internal server error)" memes'
+                          description_html: |
+                            <p>A place to discuss Ruqqus API, ask questions and post "500 (Internal server error)" memes</p>
+                          fullname: t4_3my
+                          id: 3my
+                          is_banned: false
+                          is_private: false
+                          is_restricted: false
+                          is_siege_protected: false
+                          name: RuqqusAPI
+                          over_18: false
+                          permalink: /+RuqqusAPI
+                          profile_url: 'https://i.ruqqus.com/board/ruqqusapi/profile-2.png'
+                        guild_name: RuqqusAPI
+                        id: 4z8h
+                        is_archived: false
+                        is_banned: false
+                        is_deleted: false
+                        is_nsfl: false
+                        is_nsfw: false
+                        is_offensive: false
+                        is_politics: false
+                        original_guild: null
+                        original_guild_name: null
+                        permalink: /+RuqqusAPI/post/4z8h/introducing-autoauth-for-ruqqus-automatic-and
+                        score: 10
+                        thumb_url: null
+                        title: Introducing - AutoAuth for ruqqus - Automatic and secure way to get ruqqus api authentication token
+                        upvotes: 10
+                        url: 'https://ruqqus-auth.glitch.me/'
+                        voted: 1
+                      - author:
+                          banner_url: 'https://i.ruqqus.com/users/Seq37/banner-2.png'
+                          bio: "pronounced like \"seek\"\r\n\r\nhoarding badges since 2020 & i made @imagedirectlinkbot & @snappy btw"
+                          bio_html: |
+                            <p>pronounced like "seek"</p>
+                            <p>hoarding badges since 2020 &amp; i made <a href="/@ImageDirectLinkBot"><img class="profile-pic-20 mr-1" src="/@ImageDirectLinkBot/pic/profile"/>@ImageDirectLinkBot</a> &amp; <a href="/@Snappy"><img class="profile-pic-20 mr-1" src="/@Snappy/pic/profile"/>@Snappy</a> btw</p>
+                          created_utc: 1593476358
+                          id: cwm
+                          is_banned: false
+                          is_premium: true
+                          is_private: true
+                          permalink: /@Seq37
+                          profile_url: 'https://i.ruqqus.com/users/Seq37/profile-1.png'
+                          title:
+                            color: '#666666'
+                            id: 16
+                            kind: 3
+                            text: ' the Spymaster'
+                          username: Seq37
+                        author_name: Seq37
+                        award_count: 1
+                        body: ''
+                        body_html: ''
+                        comment_count: 4
+                        created_utc: 1606498373
+                        domain: ruqqus.com
+                        downvotes: 6
+                        edited_utc: 0
+                        fullname: t2_58l0
+                        guild:
+                          banner_url: 'https://i.ruqqus.com/board/ruqqusapi/banner-3.png'
+                          color: '#2A96F3'
+                          created_utc: 1598948139
+                          description: 'A place to discuss Ruqqus API, ask questions and post "500 (Internal server error)" memes'
+                          description_html: |
+                            <p>A place to discuss Ruqqus API, ask questions and post "500 (Internal server error)" memes</p>
+                          fullname: t4_3my
+                          id: 3my
+                          is_banned: false
+                          is_private: false
+                          is_restricted: false
+                          is_siege_protected: false
+                          name: RuqqusAPI
+                          over_18: false
+                          permalink: /+RuqqusAPI
+                          profile_url: 'https://i.ruqqus.com/board/ruqqusapi/profile-2.png'
+                        guild_name: RuqqusAPI
+                        id: 58l0
+                        is_archived: false
+                        is_banned: false
+                        is_deleted: false
+                        is_nsfl: false
+                        is_nsfw: false
+                        is_offensive: false
+                        is_politics: false
+                        original_guild: null
+                        original_guild_name: null
+                        permalink: /+RuqqusAPI/post/58l0/the-apolitical-guilds-union
+                        score: 20
+                        thumb_url: 'https://i.ruqqus.com/posts/58l0/thumb.png'
+                        title: The Apolitical Guilds Union
+                        upvotes: 26
+                        url: 'https://ruqqus.com/+ApoliticalGuildsUnion/post/58ki/the-apolitical-guilds-union'
+                        voted: 1
+                      - author:
+                          banner_url: 'https://i.ruqqus.com/users/kek/banner-1.png'
+                          bio: "Ruqqus front-end dev.\r\n\r\nVue demo - https://www.youtube.com/watch?v=YddwkMJG1Jo"
+                          bio_html: |
+                            <p>Ruqqus front-end dev.</p>
+                            <p>Vue demo - <a href="https://www.youtube.com/watch?v=YddwkMJG1Jo" rel="nofollow noopener" target="_blank">https://www.youtube.com/watch?v=YddwkMJG1Jo</a></p>
+                          created_utc: 1562448602
+                          id: f
+                          is_banned: false
+                          is_premium: true
+                          is_private: false
+                          permalink: /@kek
+                          profile_url: 'https://i.ruqqus.com/users/kek/profile-0.png'
+                          title:
+                            color: '#5555dd'
+                            id: 5
+                            kind: 3
+                            text: ' the Codesmith'
+                          username: kek
+                        author_name: kek
+                        award_count: 0
+                        body: "Comment if you want your PFP and answer possibly featured on the Year in Review.\r\n\r\nThe testimonial will be similar to:\r\n\r\n![](https://i.ibb.co/sCJ9YxZ/image.png)"
+                        body_html: |
+                          <p>Comment if you want your PFP and answer possibly featured on the Year in Review.</p>
+                          <p>The testimonial will be similar to:</p>
+                          <p><a data-target="#expandImageModal" data-toggle="modal" href="https://i.ibb.co/sCJ9YxZ/image.png" onclick="expandDesktopImage('https://i.ibb.co/sCJ9YxZ/image.png');" rel="nofollow noopener" target="_blank"><img class="in-comment-image rounded-sm my-2" rel="nofollow" src="https://i.ibb.co/sCJ9YxZ/image.png" style="max-height: 100px; max-width: 100%;"/></a></p>
+                        comment_count: 5
+                        created_utc: 1608761965
+                        domain: text post
+                        downvotes: 1
+                        edited_utc: 1608762091
+                        fullname: t2_614p
+                        guild:
+                          banner_url: 'https://i.ruqqus.com/board/ruqqusapi/banner-3.png'
+                          color: '#2A96F3'
+                          created_utc: 1598948139
+                          description: 'A place to discuss Ruqqus API, ask questions and post "500 (Internal server error)" memes'
+                          description_html: |
+                            <p>A place to discuss Ruqqus API, ask questions and post "500 (Internal server error)" memes</p>
+                          fullname: t4_3my
+                          id: 3my
+                          is_banned: false
+                          is_private: false
+                          is_restricted: false
+                          is_siege_protected: false
+                          name: RuqqusAPI
+                          over_18: false
+                          permalink: /+RuqqusAPI
+                          profile_url: 'https://i.ruqqus.com/board/ruqqusapi/profile-2.png'
+                        guild_name: RuqqusAPI
+                        id: 614p
+                        is_archived: false
+                        is_banned: false
+                        is_deleted: false
+                        is_nsfl: false
+                        is_nsfw: false
+                        is_offensive: false
+                        is_politics: false
+                        original_guild: null
+                        original_guild_name: null
+                        permalink: /+RuqqusAPI/post/614p/devs-what-apps-bots-etc-have
+                        score: 6
+                        thumb_url: null
+                        title: 'Devs, what apps, bots, etc have you made with Ruqqus wrappers like r.js?'
+                        upvotes: 7
+                        url: ''
+                        voted: 1
+                      - author:
+                          banner_url: /assets/images/profiles/default_bg.png
+                          bio: ''
+                          bio_html: ''
+                          created_utc: 1585013428
+                          id: 1mr
+                          is_banned: false
+                          is_premium: true
+                          is_private: true
+                          permalink: /@Extract
+                          profile_url: 'https://i.ruqqus.com/users/Extract/profile-2.png'
+                          title:
+                            color: '#dd5555'
+                            id: 20
+                            kind: 1
+                            text: ' the Hot'
+                          username: Extract
+                        author_name: Extract
+                        award_count: 0
+                        body: "I've requested an API token for a bot account. The bot, as t he name suggests, converts Twitter links to Nitter links (or, well, it will, once I get a token and can play with the Ruqqus API for a bit).\r\n\r\nFor some reason, though, the app request is simply ignored - neither denied nor confirmed, even though it's supposed to take a few hours at most (at least according to what I've read here about the process).\r\n\r\nAny updates @captainmeta4?"
+                        body_html: |
+                          <p>I've requested an API token for a bot account. The bot, as t he name suggests, converts Twitter links to Nitter links (or, well, it will, once I get a token and can play with the Ruqqus API for a bit).</p>
+                          <p>For some reason, though, the app request is simply ignored - neither denied nor confirmed, even though it's supposed to take a few hours at most (at least according to what I've read here about the process).</p>
+                          <p>Any updates <a href="/@captainmeta4"><img class="profile-pic-20 mr-1" src="/@captainmeta4/pic/profile"/>@captainmeta4</a>?</p>
+                        comment_count: 1
+                        created_utc: 1606683001
+                        domain: ruqqus.com
+                        downvotes: 0
+                        edited_utc: 0
+                        fullname: t2_5ayl
+                        guild:
+                          banner_url: 'https://i.ruqqus.com/board/ruqqusapi/banner-3.png'
+                          color: '#2A96F3'
+                          created_utc: 1598948139
+                          description: 'A place to discuss Ruqqus API, ask questions and post "500 (Internal server error)" memes'
+                          description_html: |
+                            <p>A place to discuss Ruqqus API, ask questions and post "500 (Internal server error)" memes</p>
+                          fullname: t4_3my
+                          id: 3my
+                          is_banned: false
+                          is_private: false
+                          is_restricted: false
+                          is_siege_protected: false
+                          name: RuqqusAPI
+                          over_18: false
+                          permalink: /+RuqqusAPI
+                          profile_url: 'https://i.ruqqus.com/board/ruqqusapi/profile-2.png'
+                        guild_name: RuqqusAPI
+                        id: 5ayl
+                        is_archived: false
+                        is_banned: false
+                        is_deleted: false
+                        is_nsfl: false
+                        is_nsfw: false
+                        is_offensive: false
+                        is_politics: false
+                        original_guild: null
+                        original_guild_name: null
+                        permalink: /+RuqqusAPI/post/5ayl/app-request-stuck-in-limbo
+                        score: 6
+                        thumb_url: 'https://i.ruqqus.com/posts/5ayl/thumb.png'
+                        title: App request stuck in limbo?
+                        upvotes: 6
+                        url: 'https://ruqqus.com/@NitterBot'
+                        voted: 1
+                      - author:
+                          banner_url: 'https://i.ruqqus.com/users/acikek/banner-1.png'
+                          bio: "<ol>\r\n  <li> </li>\r\n  <li> </li>\r\n  <li> </li>\r\n  <li> </li>\r\n  <li> </li>\r\n  <li> </li>\r\n  <li> </li>\r\n  <li><b><a href=\"https://ruqqus.com/signup?ref=acikek\">acikek</a></b></li>\r\n  <li> </li>\r\n  <li>Author of ruqqus-js • @Multipurpose</li>"
+                          bio_html: |-
+                            <ol>
+                            <li> </li>
+                            <li> </li>
+                            <li> </li>
+                            <li> </li>
+                            <li> </li>
+                            <li> </li>
+                            <li> </li>
+                            <li><b><a href="https://ruqqus.com/signup?ref=acikek">acikek</a></b></li>
+                            <li> </li>
+                            <li>Author of ruqqus-js • @Multipurpose</li>
+                            </ol>
+                          created_utc: 1582741873
+                          id: pi
+                          is_banned: false
+                          is_premium: true
+                          is_private: false
+                          permalink: /@acikek
+                          profile_url: 'https://i.ruqqus.com/users/acikek/profile-1.png'
+                          title:
+                            color: '#5555dd'
+                            id: 40
+                            kind: 3
+                            text: ' the Test Dummy'
+                          username: acikek
+                        author_name: acikek
+                        award_count: 0
+                        body: '..in fact, I''m actually posting this with a bot right now. Check out https://www.npmjs.com/package/ruqqus-js !'
+                        body_html: |
+                          <p>..in fact, I'm actually posting this with a bot right now. Check out <a href="https://www.npmjs.com/package/ruqqus-js" rel="nofollow noopener" target="_blank">https://www.npmjs.com/package/ruqqus-js</a> !</p>
+                        comment_count: 23
+                        created_utc: 1599436708
+                        domain: text post
+                        downvotes: 0
+                        edited_utc: 1599451726
+                        fullname: t2_3128
+                        guild:
+                          banner_url: 'https://i.ruqqus.com/board/ruqqusapi/banner-3.png'
+                          color: '#2A96F3'
+                          created_utc: 1598948139
+                          description: 'A place to discuss Ruqqus API, ask questions and post "500 (Internal server error)" memes'
+                          description_html: |
+                            <p>A place to discuss Ruqqus API, ask questions and post "500 (Internal server error)" memes</p>
+                          fullname: t4_3my
+                          id: 3my
+                          is_banned: false
+                          is_private: false
+                          is_restricted: false
+                          is_siege_protected: false
+                          name: RuqqusAPI
+                          over_18: false
+                          permalink: /+RuqqusAPI
+                          profile_url: 'https://i.ruqqus.com/board/ruqqusapi/profile-2.png'
+                        guild_name: RuqqusAPI
+                        id: '3128'
+                        is_archived: false
+                        is_banned: false
+                        is_deleted: false
+                        is_nsfl: false
+                        is_nsfw: false
+                        is_offensive: false
+                        is_politics: false
+                        original_guild: null
+                        original_guild_name: null
+                        permalink: /+RuqqusAPI/post/3128/hey-i-just-finsihed-my-nodejs
+                        score: 35
+                        thumb_url: null
+                        title: Hey! I just finsihed my Node.js wrapper!
+                        upvotes: 34
+                        url: ''
+                        voted: 1
+                      - author:
+                          banner_url: /assets/images/profiles/default_bg.png
+                          bio: Honestly I'm mostly here because I want to be here before reddit dies to death
+                          bio_html: |
+                            <p>Honestly I'm mostly here because I want to be here before reddit dies to death</p>
+                          created_utc: 1593581595
+                          id: gpk
+                          is_banned: false
+                          is_premium: true
+                          is_private: true
+                          permalink: /@danhab99
+                          profile_url: 'https://i.ruqqus.com/users/danhab99/profile-1.png'
+                          title:
+                            color: '#885588'
+                            id: 31
+                            kind: 4
+                            text: ' the Dumpster Arsonist'
+                          username: danhab99
+                        author_name: danhab99
+                        award_count: 0
+                        body: "I've been working on a new mobile app called Scroll For Ruqqus and I've been having issues understanding how logging in works. I'm using ruqqus-js for the API wrapper but I can't get it to login. Can someone take a look and tell me if I'm doing something wrong\r\n\r\nhttps://github.com/danhab99/scroll-for-ruqqus/blob/master/views/login.js"
+                        body_html: |
+                          <p>I've been working on a new mobile app called Scroll For Ruqqus and I've been having issues understanding how logging in works. I'm using ruqqus-js for the API wrapper but I can't get it to login. Can someone take a look and tell me if I'm doing something wrong</p>
+                          <p><a href="https://github.com/danhab99/scroll-for-ruqqus/blob/master/views/login.js" rel="nofollow noopener" target="_blank">https://github.com/danhab99/scroll-for-ruqqus/blob/master/views/login.js</a></p>
+                        comment_count: 9
+                        created_utc: 1604266428
+                        domain: github.com
+                        downvotes: 0
+                        edited_utc: 0
+                        fullname: t2_4hkt
+                        guild:
+                          banner_url: 'https://i.ruqqus.com/board/ruqqusapi/banner-3.png'
+                          color: '#2A96F3'
+                          created_utc: 1598948139
+                          description: 'A place to discuss Ruqqus API, ask questions and post "500 (Internal server error)" memes'
+                          description_html: |
+                            <p>A place to discuss Ruqqus API, ask questions and post "500 (Internal server error)" memes</p>
+                          fullname: t4_3my
+                          id: 3my
+                          is_banned: false
+                          is_private: false
+                          is_restricted: false
+                          is_siege_protected: false
+                          name: RuqqusAPI
+                          over_18: false
+                          permalink: /+RuqqusAPI
+                          profile_url: 'https://i.ruqqus.com/board/ruqqusapi/profile-2.png'
+                        guild_name: RuqqusAPI
+                        id: 4hkt
+                        is_archived: false
+                        is_banned: false
+                        is_deleted: false
+                        is_nsfl: false
+                        is_nsfw: false
+                        is_offensive: false
+                        is_politics: false
+                        original_guild: null
+                        original_guild_name: null
+                        permalink: /+RuqqusAPI/post/4hkt/question-about-oauth-logging-in
+                        score: 9
+                        thumb_url: 'https://i.ruqqus.com/posts/4hkt/thumb.png'
+                        title: Question about OAuth logging in
+                        upvotes: 9
+                        url: 'https://github.com/danhab99/scroll-for-ruqqus'
+                        voted: 1
+                      - author:
+                          banner_url: 'https://i.ruqqus.com/users/vxern/banner-8.png'
+                          bio: "You're a mobile user... How did I know? ~vxern</br></br></br></br></br><h1 class=\"h3 mb-0\">[վկսերն]()</h1>\r\n<p class=\"text-muted\"></p><p>♛ Guildmaster of +WebsiteDirectory, +romanian, +polish, +english, +armenian and more.</p>"
+                          bio_html: |
+                            <p>You're a mobile user... How did I know? ~vxern<br/><br/><br/><br/><br/></p><h1><a href="">վկսերն</a></h1><p></p>
+                            <p></p><p>♛ Guildmaster of +WebsiteDirectory, +romanian, +polish, +english, +armenian and more.</p>
+                          created_utc: 1599991478
+                          id: 1ax8
+                          is_banned: false
+                          is_premium: false
+                          is_private: false
+                          permalink: /@vxern
+                          profile_url: 'https://i.ruqqus.com/users/vxern/profile-1.png'
+                          title:
+                            color: '#dd5555'
+                            id: 4
+                            kind: 3
+                            text: ', Breaker of Ruqqus'
+                          username: vxern
+                        author_name: vxern
+                        award_count: 0
+                        body: ''
+                        body_html: ''
+                        comment_count: 0
+                        created_utc: 1601416499
+                        domain: github.com
+                        downvotes: 1
+                        edited_utc: 0
+                        fullname: t2_3n65
+                        guild:
+                          banner_url: 'https://i.ruqqus.com/board/ruqqusapi/banner-3.png'
+                          color: '#2A96F3'
+                          created_utc: 1598948139
+                          description: 'A place to discuss Ruqqus API, ask questions and post "500 (Internal server error)" memes'
+                          description_html: |
+                            <p>A place to discuss Ruqqus API, ask questions and post "500 (Internal server error)" memes</p>
+                          fullname: t4_3my
+                          id: 3my
+                          is_banned: false
+                          is_private: false
+                          is_restricted: false
+                          is_siege_protected: false
+                          name: RuqqusAPI
+                          over_18: false
+                          permalink: /+RuqqusAPI
+                          profile_url: 'https://i.ruqqus.com/board/ruqqusapi/profile-2.png'
+                        guild_name: RuqqusAPI
+                        id: 3n65
+                        is_archived: false
+                        is_banned: false
+                        is_deleted: false
+                        is_nsfl: false
+                        is_nsfw: false
+                        is_offensive: false
+                        is_politics: false
+                        original_guild: null
+                        original_guild_name: null
+                        permalink: /+RuqqusAPI/post/3n65/ruqqusdart-a-powerful-dart-library-for
+                        score: 11
+                        thumb_url: 'https://i.ruqqus.com/posts/3n65/thumb.png'
+                        title: 'ruqqus.dart: A powerful Dart library for interacting with the Ruqqus API.'
+                        upvotes: 13
+                        url: 'https://github.com/devongalat/ruqqus.dart'
+                        voted: 1
+                      - author:
+                          id: yz
+                          is_deleted: true
+                          permalink: /@SuperLeaf1995
+                          username: SuperLeaf1995
+                        author_name: null
+                        award_count: 0
+                        body: "Some changes to the revision 3.\r\n\r\nThe entire thing is now better for reading."
+                        body_html: |
+                          <p>Some changes to the revision 3.</p>
+                          <p>The entire thing is now better for reading.</p>
+                        comment_count: 8
+                        created_utc: 1599961207
+                        domain: drive.google.com
+                        downvotes: 1
+                        edited_utc: 0
+                        fullname: t2_36v6
+                        guild:
+                          banner_url: 'https://i.ruqqus.com/board/ruqqusapi/banner-3.png'
+                          color: '#2A96F3'
+                          created_utc: 1598948139
+                          description: 'A place to discuss Ruqqus API, ask questions and post "500 (Internal server error)" memes'
+                          description_html: |
+                            <p>A place to discuss Ruqqus API, ask questions and post "500 (Internal server error)" memes</p>
+                          fullname: t4_3my
+                          id: 3my
+                          is_banned: false
+                          is_private: false
+                          is_restricted: false
+                          is_siege_protected: false
+                          name: RuqqusAPI
+                          over_18: false
+                          permalink: /+RuqqusAPI
+                          profile_url: 'https://i.ruqqus.com/board/ruqqusapi/profile-2.png'
+                        guild_name: RuqqusAPI
+                        id: 36v6
+                        is_archived: false
+                        is_banned: false
+                        is_deleted: false
+                        is_nsfl: false
+                        is_nsfw: false
+                        is_offensive: false
+                        is_politics: false
+                        original_guild: null
+                        original_guild_name: null
+                        permalink: /+RuqqusAPI/post/36v6/api-documentation-revision-4
+                        score: 14
+                        thumb_url: 'https://i.ruqqus.com/posts/36v6/thumb.png'
+                        title: API Documentation Revision 4.
+                        upvotes: 14
+                        url: 'https://drive.google.com/file/d/1dFzkVxidCHpvnUUTaYtLu6Cu7Wh0oeni/view?usp=sharing'
+                        voted: 1
+                      - author:
+                          banner_url: 'https://i.ruqqus.com/users/incel_45/banner-1.png'
+                          bio: is it over?
+                          bio_html: |
+                            <p>is it over?</p>
+                          created_utc: 1598734900
+                          id: 18ar
+                          is_banned: false
+                          is_premium: false
+                          is_private: false
+                          permalink: /@incel_45
+                          profile_url: 'https://i.ruqqus.com/users/incel_45/profile-2.png'
+                          title: null
+                          username: incel_45
+                        author_name: incel_45
+                        award_count: 0
+                        body: "hi,\r\nwhat's the bot world look like?  I have novice programming skills but would be willing to learn.  however i don't really know how to get started.\r\n\r\nI see that yesterdays' update may have broken some/all bots.  \r\n\r\ni checked out the sticky, but, unfortunately the list of routes means nothing to me.\r\n\r\nanyone have a bot i can look at the coding for , or anyone consider building me a bot in exchange for Ruqqus coins or crypto ?"
+                        body_html: |
+                          <p>hi,
+                          what's the bot world look like?  I have novice programming skills but would be willing to learn.  however i don't really know how to get started.</p>
+                          <p>I see that yesterdays' update may have broken some/all bots.</p>
+                          <p>i checked out the sticky, but, unfortunately the list of routes means nothing to me.</p>
+                          <p>anyone have a bot i can look at the coding for , or anyone consider building me a bot in exchange for Ruqqus coins or crypto ?</p>
+                        comment_count: 11
+                        created_utc: 1604157258
+                        domain: text post
+                        downvotes: 4
+                        edited_utc: 1604169746
+                        fullname: t2_4gbo
+                        guild:
+                          banner_url: 'https://i.ruqqus.com/board/ruqqusapi/banner-3.png'
+                          color: '#2A96F3'
+                          created_utc: 1598948139
+                          description: 'A place to discuss Ruqqus API, ask questions and post "500 (Internal server error)" memes'
+                          description_html: |
+                            <p>A place to discuss Ruqqus API, ask questions and post "500 (Internal server error)" memes</p>
+                          fullname: t4_3my
+                          id: 3my
+                          is_banned: false
+                          is_private: false
+                          is_restricted: false
+                          is_siege_protected: false
+                          name: RuqqusAPI
+                          over_18: false
+                          permalink: /+RuqqusAPI
+                          profile_url: 'https://i.ruqqus.com/board/ruqqusapi/profile-2.png'
+                        guild_name: RuqqusAPI
+                        id: 4gbo
+                        is_archived: false
+                        is_banned: false
+                        is_deleted: false
+                        is_nsfl: false
+                        is_nsfw: false
+                        is_offensive: false
+                        is_politics: false
+                        original_guild: null
+                        original_guild_name: null
+                        permalink: /+RuqqusAPI/post/4gbo/need-a-bot
+                        score: 1
+                        thumb_url: null
+                        title: need a bot
+                        upvotes: 5
+                        url: ''
+                        voted: 1
+                      - author:
+                          banner_url: 'https://i.ruqqus.com/users/movie/banner-1.png'
+                          bio: 'Made [Android App](https://play.google.com/store/apps/details?id=com.ruqqus),  [AutoAuth for ruqqus](https://ruqqus-auth.glitch.me) and @xkcdBot'
+                          bio_html: |
+                            <p>Made <a href="https://play.google.com/store/apps/details?id=com.ruqqus" rel="nofollow noopener" target="_blank">Android App</a>,  <a href="https://ruqqus-auth.glitch.me" rel="nofollow noopener" target="_blank">AutoAuth for ruqqus</a> and <a href="/@xkcdBot"><img class="profile-pic-20 mr-1" src="/@xkcdBot/pic/profile"/>@xkcdBot</a></p>
+                          created_utc: 1591950297
+                          id: 5ar
+                          is_banned: false
+                          is_premium: false
+                          is_private: false
+                          permalink: /@movie
+                          profile_url: 'https://i.ruqqus.com/users/movie/profile-3.png'
+                          title:
+                            color: '#666666'
+                            id: 16
+                            kind: 3
+                            text: ' the Spymaster'
+                          username: movie
+                        author_name: movie
+                        award_count: 0
+                        body: This is a test post made by native android app
+                        body_html: |
+                          <p>This is a test post made by native android app</p>
+                        comment_count: 1
+                        created_utc: 1599157629
+                        domain: text post
+                        downvotes: 0
+                        edited_utc: 0
+                        fullname: t2_2xv6
+                        guild:
+                          banner_url: 'https://i.ruqqus.com/board/ruqqusapi/banner-3.png'
+                          color: '#2A96F3'
+                          created_utc: 1598948139
+                          description: 'A place to discuss Ruqqus API, ask questions and post "500 (Internal server error)" memes'
+                          description_html: |
+                            <p>A place to discuss Ruqqus API, ask questions and post "500 (Internal server error)" memes</p>
+                          fullname: t4_3my
+                          id: 3my
+                          is_banned: false
+                          is_private: false
+                          is_restricted: false
+                          is_siege_protected: false
+                          name: RuqqusAPI
+                          over_18: false
+                          permalink: /+RuqqusAPI
+                          profile_url: 'https://i.ruqqus.com/board/ruqqusapi/profile-2.png'
+                        guild_name: RuqqusAPI
+                        id: 2xv6
+                        is_archived: false
+                        is_banned: false
+                        is_deleted: false
+                        is_nsfl: false
+                        is_nsfw: false
+                        is_offensive: false
+                        is_politics: false
+                        original_guild: null
+                        original_guild_name: null
+                        permalink: /+RuqqusAPI/post/2xv6/native-app-test-post
+                        score: 4
+                        thumb_url: null
+                        title: Native app test post
+                        upvotes: 4
+                        url: ''
+                        voted: 1
+                      - author:
+                          id: yz
+                          is_deleted: true
+                          permalink: /@SuperLeaf1995
+                          username: SuperLeaf1995
+                        author_name: null
+                        award_count: 0
+                        body: "This is an unofficial API guide, written in good faith to help everyone in their journey to making bots and/or APIs.\r\n\r\nIncludes two sections: One for API developers and other for Bot developers.\r\n\r\nThis explains several important stuff of the Ruqqus API.\r\n\r\nI hope this PDF is useful for API/Bot devs ;)."
+                        body_html: |
+                          <p>This is an unofficial API guide, written in good faith to help everyone in their journey to making bots and/or APIs.</p>
+                          <p>Includes two sections: One for API developers and other for Bot developers.</p>
+                          <p>This explains several important stuff of the Ruqqus API.</p>
+                          <p>I hope this PDF is useful for API/Bot devs ;).</p>
+                        comment_count: 2
+                        created_utc: 1599168920
+                        domain: drive.google.com
+                        downvotes: 1
+                        edited_utc: 0
+                        fullname: t2_2y1f
+                        guild:
+                          banner_url: 'https://i.ruqqus.com/board/ruqqusapi/banner-3.png'
+                          color: '#2A96F3'
+                          created_utc: 1598948139
+                          description: 'A place to discuss Ruqqus API, ask questions and post "500 (Internal server error)" memes'
+                          description_html: |
+                            <p>A place to discuss Ruqqus API, ask questions and post "500 (Internal server error)" memes</p>
+                          fullname: t4_3my
+                          id: 3my
+                          is_banned: false
+                          is_private: false
+                          is_restricted: false
+                          is_siege_protected: false
+                          name: RuqqusAPI
+                          over_18: false
+                          permalink: /+RuqqusAPI
+                          profile_url: 'https://i.ruqqus.com/board/ruqqusapi/profile-2.png'
+                        guild_name: RuqqusAPI
+                        id: 2y1f
+                        is_archived: false
+                        is_banned: false
+                        is_deleted: false
+                        is_nsfl: false
+                        is_nsfw: false
+                        is_offensive: false
+                        is_politics: false
+                        original_guild: null
+                        original_guild_name: null
+                        permalink: /+RuqqusAPI/post/2y1f/api-guide-for-bot-and-api
+                        score: 3
+                        thumb_url: null
+                        title: API Guide for bot and API developers
+                        upvotes: 4
+                        url: 'https://drive.google.com/file/d/1EGSuDSPShxEHEjGz1NJ1K7VcXqpanVQy/view?usp=sharing'
+                        voted: 1
+                      - author:
+                          banner_url: 'https://i.ruqqus.com/users/Seq37/banner-2.png'
+                          bio: "pronounced like \"seek\"\r\n\r\nhoarding badges since 2020 & i made @imagedirectlinkbot & @snappy btw"
+                          bio_html: |
+                            <p>pronounced like "seek"</p>
+                            <p>hoarding badges since 2020 &amp; i made <a href="/@ImageDirectLinkBot"><img class="profile-pic-20 mr-1" src="/@ImageDirectLinkBot/pic/profile"/>@ImageDirectLinkBot</a> &amp; <a href="/@Snappy"><img class="profile-pic-20 mr-1" src="/@Snappy/pic/profile"/>@Snappy</a> btw</p>
+                          created_utc: 1593476358
+                          id: cwm
+                          is_banned: false
+                          is_premium: true
+                          is_private: true
+                          permalink: /@Seq37
+                          profile_url: 'https://i.ruqqus.com/users/Seq37/profile-1.png'
+                          title:
+                            color: '#666666'
+                            id: 16
+                            kind: 3
+                            text: ' the Spymaster'
+                          username: Seq37
+                        author_name: Seq37
+                        award_count: 0
+                        body: "Ruqqus API error codes be like:\r\n\r\n* 401: your token is invalid or expired (✿◠‿◠)\r\n* 403: you don't have access to this data ٩◔‿◔۶\r\n* 404: this API method does not exist ≧◡≦\r\n* 405: you should probably change your request method ≖‿≖\r\n* 500: I̷̜ͯnͮ̾͒tͪͩ͗e̍̓r̸͐ͯn̫͂̇aͣ̔̾lͫ͑̇ ̏̃ͯS̮̲͐éͦ̚r̔ͭ̔v͆̌͌e̵̐ͅȑͨ͂ ̧̪ͪȨ̺̃r̄ͤ͆r͔͌̀ǫ̮̱r̠͆͆"
+                        body_html: |
+                          <p>Ruqqus API error codes be like:</p>
+                          <ul>
+                          <li>401: your token is invalid or expired (✿◠‿◠)</li>
+                          <li>403: you don't have access to this data ٩◔‿◔۶</li>
+                          <li>404: this API method does not exist ≧◡≦</li>
+                          <li>405: you should probably change your request method ≖‿≖</li>
+                          <li>500: I̷̜ͯnͮ̾͒tͪͩ͗e̍̓r̸͐ͯn̫͂̇aͣ̔̾lͫ͑̇ ̏̃ͯS̮̲͐éͦ̚r̔ͭ̔v͆̌͌e̵̐ͅȑͨ͂ ̧̪ͪȨ̺̃r̄ͤ͆r͔͌̀ǫ̮̱r̠͆͆</li>
+                          </ul>
+                        comment_count: 0
+                        created_utc: 1598950181
+                        domain: text post
+                        downvotes: 1
+                        edited_utc: 0
+                        fullname: t2_2v07
+                        guild:
+                          banner_url: 'https://i.ruqqus.com/board/ruqqusapi/banner-3.png'
+                          color: '#2A96F3'
+                          created_utc: 1598948139
+                          description: 'A place to discuss Ruqqus API, ask questions and post "500 (Internal server error)" memes'
+                          description_html: |
+                            <p>A place to discuss Ruqqus API, ask questions and post "500 (Internal server error)" memes</p>
+                          fullname: t4_3my
+                          id: 3my
+                          is_banned: false
+                          is_private: false
+                          is_restricted: false
+                          is_siege_protected: false
+                          name: RuqqusAPI
+                          over_18: false
+                          permalink: /+RuqqusAPI
+                          profile_url: 'https://i.ruqqus.com/board/ruqqusapi/profile-2.png'
+                        guild_name: RuqqusAPI
+                        id: 2v07
+                        is_archived: false
+                        is_banned: false
+                        is_deleted: false
+                        is_nsfl: false
+                        is_nsfw: false
+                        is_offensive: false
+                        is_politics: false
+                        original_guild: null
+                        original_guild_name: null
+                        permalink: /+RuqqusAPI/post/2v07/a-joke-i-came-up-with
+                        score: 3
+                        thumb_url: null
+                        title: A joke I came up with a while ago
+                        upvotes: 4
+                        url: ''
+                        voted: 1
+                      - author:
+                          banner_url: 'https://i.ruqqus.com/users/acikek/banner-1.png'
+                          bio: "<ol>\r\n  <li> </li>\r\n  <li> </li>\r\n  <li> </li>\r\n  <li> </li>\r\n  <li> </li>\r\n  <li> </li>\r\n  <li> </li>\r\n  <li><b><a href=\"https://ruqqus.com/signup?ref=acikek\">acikek</a></b></li>\r\n  <li> </li>\r\n  <li>Author of ruqqus-js • @Multipurpose</li>"
+                          bio_html: |-
+                            <ol>
+                            <li> </li>
+                            <li> </li>
+                            <li> </li>
+                            <li> </li>
+                            <li> </li>
+                            <li> </li>
+                            <li> </li>
+                            <li><b><a href="https://ruqqus.com/signup?ref=acikek">acikek</a></b></li>
+                            <li> </li>
+                            <li>Author of ruqqus-js • @Multipurpose</li>
+                            </ol>
+                          created_utc: 1582741873
+                          id: pi
+                          is_banned: false
+                          is_premium: true
+                          is_private: false
+                          permalink: /@acikek
+                          profile_url: 'https://i.ruqqus.com/users/acikek/profile-1.png'
+                          title:
+                            color: '#5555dd'
+                            id: 40
+                            kind: 3
+                            text: ' the Test Dummy'
+                          username: acikek
+                        author_name: acikek
+                        award_count: 0
+                        body: idk whats going on with events
+                        body_html: |
+                          <p>idk whats going on with events</p>
+                        comment_count: 5
+                        created_utc: 1599354035
+                        domain: text post
+                        downvotes: 1
+                        edited_utc: 0
+                        fullname: t2_306z
+                        guild:
+                          banner_url: 'https://i.ruqqus.com/board/ruqqusapi/banner-3.png'
+                          color: '#2A96F3'
+                          created_utc: 1598948139
+                          description: 'A place to discuss Ruqqus API, ask questions and post "500 (Internal server error)" memes'
+                          description_html: |
+                            <p>A place to discuss Ruqqus API, ask questions and post "500 (Internal server error)" memes</p>
+                          fullname: t4_3my
+                          id: 3my
+                          is_banned: false
+                          is_private: false
+                          is_restricted: false
+                          is_siege_protected: false
+                          name: RuqqusAPI
+                          over_18: false
+                          permalink: /+RuqqusAPI
+                          profile_url: 'https://i.ruqqus.com/board/ruqqusapi/profile-2.png'
+                        guild_name: RuqqusAPI
+                        id: 306z
+                        is_archived: false
+                        is_banned: false
+                        is_deleted: false
+                        is_nsfl: false
+                        is_nsfw: false
+                        is_offensive: false
+                        is_politics: false
+                        original_guild: null
+                        original_guild_name: null
+                        permalink: /+RuqqusAPI/post/306z/yet-another-test-post
+                        score: 2
+                        thumb_url: null
+                        title: yet another test post
+                        upvotes: 3
+                        url: ''
+                        voted: 1
+                      - author:
+                          banner_url: 'https://i.ruqqus.com/users/foreverzer0/banner-3.png'
+                          bio: ''
+                          bio_html: ''
+                          created_utc: 1592359144
+                          id: 6uo
+                          is_banned: false
+                          is_premium: false
+                          is_private: true
+                          permalink: /@foreverzer0
+                          profile_url: 'https://i.ruqqus.com/users/foreverzer0/profile-2.png'
+                          title:
+                            color: '#5555dd'
+                            id: 22
+                            kind: 1
+                            text: ' the Likeable'
+                          username: foreverzer0
+                        author_name: foreverzer0
+                        award_count: 0
+                        body: "I have been working on a Ruby implementation of the API, and am down to the last of the \"common\" functionality, and so far so good, everything works like a charm.\r\n\r\nWhen it comes to implementing [api_vote_post](https://github.com/ruqqus/ruqqus/blob/7dfe5b22732434362a7b98553417d089c3cd0c3b/ruqqus/routes/votes.py#L17) and [api_vote_comment](https://github.com/ruqqus/ruqqus/blob/7dfe5b22732434362a7b98553417d089c3cd0c3b/ruqqus/routes/votes.py#L71), for the life of me I cannot get this to work, and strangest yet it returns a 404, when it clearly exists.\r\n\r\nSo here's what I am doing and what is causing the error. For the sake of example, let's use [this post](https://ruqqus.com/post/1wbo/hi-im-josh-roehl-singer-and) and say I am attempting to upvote it. \r\n\r\n* Have confirmed I am properly authorized, as I can make other API calls both before and after this call fails with the same authentication. I have also confirmed that `vote` is in my scopes.\r\n* `Authorization` header is properly formatted (as I stated, everything else works)\r\n* Build the following URI: https://ruqqus.com/api/v1/vote/post/1wbo/1\r\n* Send an POST request to that URL with no parameters\r\n* 404 error returned\r\n* Retry using the \"full name\" as `t2_1wbo`, same outcome.\r\n* Same thing applies when doing the same with the comment endpoint\r\n\r\nI am at my wit's end, and this simple API call has defeated me. Can anyone even just confirm/deny that this is working for them?\r\n\r\n\r\nEDIT: \r\n\r\nI fixed a typo in a constant that caused the 404, but now I am just back to 401 (Unauthorized), which was the original error for the first 10-20 times I rewrote the method.\r\n"
+                        body_html: |
+                          <p>I have been working on a Ruby implementation of the API, and am down to the last of the "common" functionality, and so far so good, everything works like a charm.</p>
+                          <p>When it comes to implementing <a href="https://github.com/ruqqus/ruqqus/blob/7dfe5b22732434362a7b98553417d089c3cd0c3b/ruqqus/routes/votes.py#L17" rel="nofollow noopener" target="_blank">api_vote_post</a> and <a href="https://github.com/ruqqus/ruqqus/blob/7dfe5b22732434362a7b98553417d089c3cd0c3b/ruqqus/routes/votes.py#L71" rel="nofollow noopener" target="_blank">api_vote_comment</a>, for the life of me I cannot get this to work, and strangest yet it returns a 404, when it clearly exists.</p>
+                          <p>So here's what I am doing and what is causing the error. For the sake of example, let's use <a href="https://ruqqus.com/post/1wbo/hi-im-josh-roehl-singer-and">this post</a> and say I am attempting to upvote it.</p>
+                          <ul>
+                          <li>Have confirmed I am properly authorized, as I can make other API calls both before and after this call fails with the same authentication. I have also confirmed that <code>vote</code> is in my scopes.</li>
+                          <li><code>Authorization</code> header is properly formatted (as I stated, everything else works)</li>
+                          <li>Build the following URI: <a href="https://ruqqus.com/api/v1/vote/post/1wbo/1">https://ruqqus.com/api/v1/vote/post/1wbo/1</a></li>
+                          <li>Send an POST request to that URL with no parameters</li>
+                          <li>404 error returned</li>
+                          <li>Retry using the "full name" as <code>t2_1wbo</code>, same outcome.</li>
+                          <li>Same thing applies when doing the same with the comment endpoint</li>
+                          </ul>
+                          <p>I am at my wit's end, and this simple API call has defeated me. Can anyone even just confirm/deny that this is working for them?</p>
+                          <p>EDIT:</p>
+                          <p>I fixed a typo in a constant that caused the 404, but now I am just back to 401 (Unauthorized), which was the original error for the first 10-20 times I rewrote the method.</p>
+                        comment_count: 4
+                        created_utc: 1599131701
+                        domain: text post
+                        downvotes: 0
+                        edited_utc: 1599137559
+                        fullname: t2_2xgo
+                        guild:
+                          banner_url: 'https://i.ruqqus.com/board/ruqqusapi/banner-3.png'
+                          color: '#2A96F3'
+                          created_utc: 1598948139
+                          description: 'A place to discuss Ruqqus API, ask questions and post "500 (Internal server error)" memes'
+                          description_html: |
+                            <p>A place to discuss Ruqqus API, ask questions and post "500 (Internal server error)" memes</p>
+                          fullname: t4_3my
+                          id: 3my
+                          is_banned: false
+                          is_private: false
+                          is_restricted: false
+                          is_siege_protected: false
+                          name: RuqqusAPI
+                          over_18: false
+                          permalink: /+RuqqusAPI
+                          profile_url: 'https://i.ruqqus.com/board/ruqqusapi/profile-2.png'
+                        guild_name: RuqqusAPI
+                        id: 2xgo
+                        is_archived: false
+                        is_banned: false
+                        is_deleted: false
+                        is_nsfl: false
+                        is_nsfw: false
+                        is_offensive: false
+                        is_politics: false
+                        original_guild: null
+                        original_guild_name: null
+                        permalink: /+RuqqusAPI/post/2xgo/is-the-apis-postcomment-voting-broken
+                        score: 2
+                        thumb_url: null
+                        title: 'Is the API''s post/comment voting broken, or am I just being stupid?'
+                        upvotes: 2
+                        url: ''
+                        voted: 1
+                      - author:
+                          banner_url: 'https://i.ruqqus.com/users/acikek/banner-1.png'
+                          bio: "<ol>\r\n  <li> </li>\r\n  <li> </li>\r\n  <li> </li>\r\n  <li> </li>\r\n  <li> </li>\r\n  <li> </li>\r\n  <li> </li>\r\n  <li><b><a href=\"https://ruqqus.com/signup?ref=acikek\">acikek</a></b></li>\r\n  <li> </li>\r\n  <li>Author of ruqqus-js • @Multipurpose</li>"
+                          bio_html: |-
+                            <ol>
+                            <li> </li>
+                            <li> </li>
+                            <li> </li>
+                            <li> </li>
+                            <li> </li>
+                            <li> </li>
+                            <li> </li>
+                            <li><b><a href="https://ruqqus.com/signup?ref=acikek">acikek</a></b></li>
+                            <li> </li>
+                            <li>Author of ruqqus-js • @Multipurpose</li>
+                            </ol>
+                          created_utc: 1582741873
+                          id: pi
+                          is_banned: false
+                          is_premium: true
+                          is_private: false
+                          permalink: /@acikek
+                          profile_url: 'https://i.ruqqus.com/users/acikek/profile-1.png'
+                          title:
+                            color: '#5555dd'
+                            id: 40
+                            kind: 3
+                            text: ' the Test Dummy'
+                          username: acikek
+                        author_name: acikek
+                        award_count: 0
+                        body: 'If you''re reading this, this post was made by a bot!'
+                        body_html: |
+                          <p>If you're reading this, this post was made by a bot!</p>
+                        comment_count: 7
+                        created_utc: 1599076575
+                        domain: text post
+                        downvotes: 0
+                        edited_utc: 0
+                        fullname: t2_2wrn
+                        guild:
+                          banner_url: 'https://i.ruqqus.com/board/ruqqusapi/banner-3.png'
+                          color: '#2A96F3'
+                          created_utc: 1598948139
+                          description: 'A place to discuss Ruqqus API, ask questions and post "500 (Internal server error)" memes'
+                          description_html: |
+                            <p>A place to discuss Ruqqus API, ask questions and post "500 (Internal server error)" memes</p>
+                          fullname: t4_3my
+                          id: 3my
+                          is_banned: false
+                          is_private: false
+                          is_restricted: false
+                          is_siege_protected: false
+                          name: RuqqusAPI
+                          over_18: false
+                          permalink: /+RuqqusAPI
+                          profile_url: 'https://i.ruqqus.com/board/ruqqusapi/profile-2.png'
+                        guild_name: RuqqusAPI
+                        id: 2wrn
+                        is_archived: false
+                        is_banned: false
+                        is_deleted: false
+                        is_nsfl: false
+                        is_nsfw: false
+                        is_offensive: false
+                        is_politics: false
+                        original_guild: null
+                        original_guild_name: null
+                        permalink: /+RuqqusAPI/post/2wrn/this-is-a-test-post
+                        score: 2
+                        thumb_url: null
+                        title: This is a test post!
+                        upvotes: 2
+                        url: ''
+                        voted: 1
+                    next_exists: false
+        '401':
+          $ref: '#/components/responses/401-Not-Authorized'
+        '403':
+          $ref: '#/components/responses/403-Forbidden'
+      parameters: []
+    parameters:
+      - schema:
+          type: string
+        name: name
+        in: path
+        required: true
+        description: Guild name
+components:
+  schemas:
+    User:
+      description: ''
+      type: object
+      properties:
+        badges:
+          type: array
+          uniqueItems: true
+          minItems: 1
+          items:
+            required:
+              - created_utc
+              - icon_url
+              - name
+              - text
+              - url
+            properties:
+              created_utc:
+                type: number
+              icon_url:
+                type: string
+                minLength: 1
+              name:
+                type: string
+                minLength: 1
+              text:
+                type: string
+                minLength: 1
+              url:
+                type: string
+                minLength: 1
+        banner_url:
+          type: string
+          minLength: 1
+        bio:
+          type: string
+          minLength: 1
+        bio_html:
+          type: string
+          minLength: 1
+        comment_count:
+          type: number
+        comment_rep:
+          type: number
+        created_utc:
+          type: number
+        id:
+          type: string
+          minLength: 1
+        is_banned:
+          type: boolean
+        is_premium:
+          type: boolean
+        is_private:
+          type: boolean
+        permalink:
+          type: string
+          minLength: 1
+        post_count:
+          type: number
+        post_rep:
+          type: number
+        profile_url:
+          type: string
+          minLength: 1
+        title:
+          type: object
+          properties:
+            color:
+              type: string
+              minLength: 1
+            id:
+              type: number
+            kind:
+              type: number
+            text:
+              type: string
+              minLength: 1
+          required:
+            - color
+            - id
+            - kind
+            - text
+        username:
+          type: string
+          minLength: 1
+      required:
+        - badges
+        - banner_url
+        - bio
+        - bio_html
+        - comment_count
+        - comment_rep
+        - created_utc
+        - id
+        - is_banned
+        - is_premium
+        - is_private
+        - permalink
+        - post_count
+        - post_rep
+        - profile_url
+        - title
+        - username
+      x-examples:
+        example:
+          badges:
+            - created_utc: 1603306506
+              icon_url: 'https://ruqqus.com/assets/images/badges/git.png'
+              name: Code Contributor
+              text: Contributed to Ruqqus source code
+              url: 'https://github.com/ruqqus/ruqqus/pull/449'
+            - created_utc: 1603306841
+              icon_url: 'https://ruqqus.com/assets/images/badges/whitehat.png'
+              name: White Hat
+              text: Reported a flaw in api access token authentication
+              url: null
+            - created_utc: 1606246044
+              icon_url: 'https://ruqqus.com/assets/images/badges/sitebreaker.png'
+              name: Sitebreaker
+              text: Inadvertantly broke Ruqqus
+              url: 'https://github.com/ruqqus/ruqqus/commit/97f3c6a64cb7f073a8f300327e07b5e7feb4496a'
+            - created_utc: null
+              icon_url: 'https://ruqqus.com/assets/images/badges/beta.png'
+              name: Beta User
+              text: Joined Ruqqus during open beta
+              url: null
+            - created_utc: 1593011401
+              icon_url: 'https://ruqqus.com/assets/images/badges/recruit-1.png'
+              name: Recruiter
+              text: Recruited 1 friend to join Ruqqus
+              url: null
+            - created_utc: 1591951204
+              icon_url: 'https://ruqqus.com/assets/images/badges/mail.png'
+              name: Verified Email
+              text: Verified Email
+              url: null
+            - created_utc: 1603560046
+              icon_url: 'https://ruqqus.com/assets/images/badges/game-participant.png'
+              name: Game Night Participant
+              text: Participated in a Ruqqus community gaming event
+              url: null
+            - created_utc: 1603389376
+              icon_url: 'https://ruqqus.com/assets/images/badges/art.png'
+              name: Artisan
+              text: Contributed to Ruqqus artwork or text
+              url: 'https://github.com/ruqqus/ruqqus/pull/438'
+          banner_url: 'https://i.ruqqus.com/users/movie/banner-1.png'
+          bio: 'Made [Android App](https://play.google.com/store/apps/details?id=com.ruqqus),  [AutoAuth for ruqqus](https://ruqqus-auth.glitch.me) and @xkcdBot'
+          bio_html: |
+            <p>Made <a href="https://play.google.com/store/apps/details?id=com.ruqqus" rel="nofollow noopener" target="_blank">Android App</a>,  <a href="https://ruqqus-auth.glitch.me" rel="nofollow noopener" target="_blank">AutoAuth for ruqqus</a> and <a href="/@xkcdBot"><img class="profile-pic-20 mr-1" src="/@xkcdBot/pic/profile"/>@xkcdBot</a></p>
+          comment_count: 177
+          comment_rep: 348
+          created_utc: 1591950297
+          id: 5ar
+          is_banned: false
+          is_premium: false
+          is_private: false
+          permalink: /@movie
+          post_count: 108
+          post_rep: 1212
+          profile_url: 'https://i.ruqqus.com/users/movie/profile-3.png'
+          title:
+            color: '#666666'
+            id: 16
+            kind: 3
+            text: ' the Spymaster'
+          username: movie
+      title: User
+    Badge:
+      description: ''
+      type: object
+      properties:
+        created_utc:
+          type: number
+        icon_url:
+          type: string
+          minLength: 1
+        name:
+          type: string
+          minLength: 1
+        text:
+          type: string
+          minLength: 1
+        url:
+          type: string
+          minLength: 1
+      required:
+        - created_utc
+        - icon_url
+        - name
+        - text
+        - url
+      x-examples:
+        Code Contributor:
+          created_utc: 1603306506
+          icon_url: 'https://ruqqus.com/assets/images/badges/git.png'
+          name: Code Contributor
+          text: Contributed to Ruqqus source code
+          url: 'https://github.com/ruqqus/ruqqus/pull/449'
+        White Hat:
+          created_utc: 1603306841
+          icon_url: 'https://ruqqus.com/assets/images/badges/whitehat.png'
+          name: White Hat
+          text: Reported a flaw in api access token authentication
+          url: null
+        Sitebreaker:
+          created_utc: 1606246044
+          icon_url: 'https://ruqqus.com/assets/images/badges/sitebreaker.png'
+          name: Sitebreaker
+          text: Inadvertantly broke Ruqqus
+          url: 'https://github.com/ruqqus/ruqqus/commit/97f3c6a64cb7f073a8f300327e07b5e7feb4496a'
+      title: Badge
+    Guild:
+      description: ''
+      type: object
+      properties:
+        banner_url:
+          type: string
+          minLength: 1
+        color:
+          type: string
+          minLength: 1
+        created_utc:
+          type: number
+        description:
+          type: string
+          minLength: 1
+        description_html:
+          type: string
+          minLength: 1
+        fullname:
+          type: string
+          minLength: 1
+        id:
+          type: string
+          minLength: 1
+        is_banned:
+          type: boolean
+        is_private:
+          type: boolean
+        is_restricted:
+          type: boolean
+        is_siege_protected:
+          type: boolean
+        name:
+          type: string
+          minLength: 1
+        over_18:
+          type: boolean
+        permalink:
+          type: string
+          minLength: 1
+        profile_url:
+          type: string
+          minLength: 1
+      required:
+        - banner_url
+        - color
+        - created_utc
+        - description
+        - description_html
+        - fullname
+        - id
+        - is_banned
+        - is_private
+        - is_restricted
+        - is_siege_protected
+        - name
+        - over_18
+        - permalink
+        - profile_url
+      x-examples:
+        example:
+          banner_url: 'https://i.ruqqus.com/board/ruqqusapi/banner-3.png'
+          color: '#2A96F3'
+          created_utc: 1598948139
+          description: 'A place to discuss Ruqqus API, ask questions and post "500 (Internal server error)" memes'
+          description_html: |
+            <p>A place to discuss Ruqqus API, ask questions and post "500 (Internal server error)" memes</p>
+          fullname: t4_3my
+          id: 3my
+          is_banned: false
+          is_private: false
+          is_restricted: false
+          is_siege_protected: false
+          name: RuqqusAPI
+          over_18: false
+          permalink: /+RuqqusAPI
+          profile_url: 'https://i.ruqqus.com/board/ruqqusapi/profile-2.png'
+      title: Guild
+    Post:
+      description: ''
+      type: object
+      properties:
+        author:
+          type: object
+          properties:
+            banner_url:
+              type: string
+              minLength: 1
+            bio:
+              type: string
+              minLength: 1
+            bio_html:
+              type: string
+              minLength: 1
+            created_utc:
+              type: number
+            id:
+              type: string
+              minLength: 1
+            is_banned:
+              type: boolean
+            is_premium:
+              type: boolean
+            is_private:
+              type: boolean
+            permalink:
+              type: string
+              minLength: 1
+            profile_url:
+              type: string
+              minLength: 1
+            title:
+              type: object
+              properties:
+                color:
+                  type: string
+                  minLength: 1
+                id:
+                  type: number
+                kind:
+                  type: number
+                text:
+                  type: string
+                  minLength: 1
+              required:
+                - color
+                - id
+                - kind
+                - text
+            username:
+              type: string
+              minLength: 1
+          required:
+            - banner_url
+            - bio
+            - bio_html
+            - created_utc
+            - id
+            - is_banned
+            - is_premium
+            - is_private
+            - permalink
+            - profile_url
+            - title
+            - username
+        author_name:
+          type: string
+          minLength: 1
+        award_count:
+          type: number
+        body:
+          type: string
+          minLength: 1
+        body_html:
+          type: string
+          minLength: 1
+        comment_count:
+          type: number
+        created_utc:
+          type: number
+        domain:
+          type: string
+          minLength: 1
+        downvotes:
+          type: number
+        edited_utc:
+          type: number
+        fullname:
+          type: string
+          minLength: 1
+        guild:
+          type: object
+          properties:
+            banner_url:
+              type: string
+              minLength: 1
+            color:
+              type: string
+              minLength: 1
+            created_utc:
+              type: number
+            description:
+              type: string
+              minLength: 1
+            description_html:
+              type: string
+              minLength: 1
+            fullname:
+              type: string
+              minLength: 1
+            id:
+              type: string
+              minLength: 1
+            is_banned:
+              type: boolean
+            is_private:
+              type: boolean
+            is_restricted:
+              type: boolean
+            is_siege_protected:
+              type: boolean
+            name:
+              type: string
+              minLength: 1
+            over_18:
+              type: boolean
+            permalink:
+              type: string
+              minLength: 1
+            profile_url:
+              type: string
+              minLength: 1
+          required:
+            - banner_url
+            - color
+            - created_utc
+            - description
+            - description_html
+            - fullname
+            - id
+            - is_banned
+            - is_private
+            - is_restricted
+            - is_siege_protected
+            - name
+            - over_18
+            - permalink
+            - profile_url
+        guild_name:
+          type: string
+          minLength: 1
+        id:
+          type: string
+          minLength: 1
+        is_archived:
+          type: boolean
+        is_banned:
+          type: boolean
+        is_deleted:
+          type: boolean
+        is_nsfl:
+          type: boolean
+        is_nsfw:
+          type: boolean
+        is_offensive:
+          type: boolean
+        is_politics:
+          type: boolean
+        original_guild: {}
+        original_guild_name: {}
+        permalink:
+          type: string
+          minLength: 1
+        score:
+          type: number
+        thumb_url: {}
+        title:
+          type: string
+          minLength: 1
+        upvotes:
+          type: number
+        url:
+          type: string
+        voted:
+          type: number
+      required:
+        - author
+        - author_name
+        - award_count
+        - body
+        - body_html
+        - comment_count
+        - created_utc
+        - domain
+        - downvotes
+        - edited_utc
+        - fullname
+        - guild
+        - guild_name
+        - id
+        - is_archived
+        - is_banned
+        - is_deleted
+        - is_nsfl
+        - is_nsfw
+        - is_offensive
+        - is_politics
+        - permalink
+        - score
+        - title
+        - upvotes
+        - url
+        - voted
+      x-examples:
+        example:
+          author:
+            banner_url: 'https://i.ruqqus.com/users/movie/banner-1.png'
+            bio: 'Made [Android App](https://play.google.com/store/apps/details?id=com.ruqqus),  [AutoAuth for ruqqus](https://ruqqus-auth.glitch.me) and @xkcdBot'
+            bio_html: |
+              <p>Made <a href="https://play.google.com/store/apps/details?id=com.ruqqus" rel="nofollow noopener" target="_blank">Android App</a>,  <a href="https://ruqqus-auth.glitch.me" rel="nofollow noopener" target="_blank">AutoAuth for ruqqus</a> and <a href="/@xkcdBot"><img class="profile-pic-20 mr-1" src="/@xkcdBot/pic/profile"/>@xkcdBot</a></p>
+            created_utc: 1591950297
+            id: 5ar
+            is_banned: false
+            is_premium: false
+            is_private: false
+            permalink: /@movie
+            profile_url: 'https://i.ruqqus.com/users/movie/profile-3.png'
+            title:
+              color: '#666666'
+              id: 16
+              kind: 3
+              text: ' the Spymaster'
+            username: movie
+          author_name: movie
+          award_count: 0
+          body: "Currently there is no official documentation for Ruqqus API but there is unofficial one by @SuperLeaf1995  https://ruqq.us/36v6, and there is a help page on how to get started with the api: https://ruqqus.com/help/oauth   \r\n\r\nYou can search through [Ruqqus's GitHub page](https://github.com/ruqqus/ruqqus) to find all of the routes.  \r\n\r\nMore specifically: https://github.com/ruqqus/ruqqus/tree/master/ruqqus/routes    \r\n\r\n<hr>   \r\n\r\nIf you wan't to get started making bots check out [ruqqus-js](https://www.npmjs.com/package/ruqqus-js) by @acikek  \r\nIf you are having trouble getting `access token` check out [AutoAuth for ruqqus](https://ruqqus-auth.glitch.me)\r\n\r\n"
+          body_html: |
+            <p>Currently there is no official documentation for Ruqqus API but there is unofficial one by <a href="/@SuperLeaf1995"><img class="profile-pic-20 mr-1" src="/@SuperLeaf1995/pic/profile"/>@SuperLeaf1995</a> <a href="https://ruqq.us/36v6">https://ruqq.us/36v6</a>, and there is a help page on how to get started with the api: <a href="https://ruqqus.com/help/oauth">https://ruqqus.com/help/oauth</a></p>
+            <p>You can search through <a href="https://github.com/ruqqus/ruqqus" rel="nofollow noopener" target="_blank">Ruqqus's GitHub page</a> to find all of the routes.</p>
+            <p>More specifically: <a href="https://github.com/ruqqus/ruqqus/tree/master/ruqqus/routes" rel="nofollow noopener" target="_blank">https://github.com/ruqqus/ruqqus/tree/master/ruqqus/routes</a></p>
+            <hr/>
+            <p>If you wan't to get started making bots check out <a href="https://www.npmjs.com/package/ruqqus-js" rel="nofollow noopener" target="_blank">ruqqus-js</a> by <a href="/@acikek"><img class="profile-pic-20 mr-1" src="/@acikek/pic/profile"/>@acikek</a>  
+            If you are having trouble getting <code>access token</code> check out <a href="https://ruqqus-auth.glitch.me" rel="nofollow noopener" target="_blank">AutoAuth for ruqqus</a></p>
+          comment_count: 7
+          created_utc: 1598950552
+          domain: text post
+          downvotes: 0
+          edited_utc: 1605778377
+          fullname: t2_2v0b
+          guild:
+            banner_url: 'https://i.ruqqus.com/board/ruqqusapi/banner-3.png'
+            color: '#2A96F3'
+            created_utc: 1598948139
+            description: 'A place to discuss Ruqqus API, ask questions and post "500 (Internal server error)" memes'
+            description_html: |
+              <p>A place to discuss Ruqqus API, ask questions and post "500 (Internal server error)" memes</p>
+            fullname: t4_3my
+            id: 3my
+            is_banned: false
+            is_private: false
+            is_restricted: false
+            is_siege_protected: false
+            name: RuqqusAPI
+            over_18: false
+            permalink: /+RuqqusAPI
+            profile_url: 'https://i.ruqqus.com/board/ruqqusapi/profile-2.png'
+          guild_name: RuqqusAPI
+          id: 2v0b
+          is_archived: false
+          is_banned: false
+          is_deleted: false
+          is_nsfl: false
+          is_nsfw: false
+          is_offensive: false
+          is_politics: false
+          original_guild: null
+          original_guild_name: null
+          permalink: /+RuqqusAPI/post/2v0b/how-to-get-started-using-ruqqus
+          score: 9
+          thumb_url: null
+          title: How to get started using Ruqqus API
+          upvotes: 9
+          url: ''
+          voted: 1
+    Comment:
+      description: ''
+      type: object
+      properties:
+        author:
+          type: object
+          properties:
+            banner_url:
+              type: string
+              minLength: 1
+            bio:
+              type: string
+            bio_html:
+              type: string
+            created_utc:
+              type: number
+            id:
+              type: string
+              minLength: 1
+            is_banned:
+              type: boolean
+            is_premium:
+              type: boolean
+            is_private:
+              type: boolean
+            permalink:
+              type: string
+              minLength: 1
+            profile_url:
+              type: string
+              minLength: 1
+            title:
+              type: object
+              properties:
+                color:
+                  type: string
+                  minLength: 1
+                id:
+                  type: number
+                kind:
+                  type: number
+                text:
+                  type: string
+                  minLength: 1
+              required:
+                - color
+                - id
+                - kind
+                - text
+            username:
+              type: string
+              minLength: 1
+          required:
+            - banner_url
+            - bio
+            - bio_html
+            - created_utc
+            - id
+            - is_banned
+            - is_premium
+            - is_private
+            - permalink
+            - profile_url
+            - title
+            - username
+        author_name:
+          type: string
+          minLength: 1
+        award_count:
+          type: number
+        body:
+          type: string
+          minLength: 1
+        body_html:
+          type: string
+          minLength: 1
+        created_utc:
+          type: number
+        downvotes:
+          type: number
+        edited_utc:
+          type: number
+        fullname:
+          type: string
+          minLength: 1
+        guild:
+          type: object
+          properties:
+            banner_url:
+              type: string
+              minLength: 1
+            color:
+              type: string
+              minLength: 1
+            created_utc:
+              type: number
+            description:
+              type: string
+              minLength: 1
+            description_html:
+              type: string
+              minLength: 1
+            fullname:
+              type: string
+              minLength: 1
+            id:
+              type: string
+              minLength: 1
+            is_banned:
+              type: boolean
+            is_private:
+              type: boolean
+            is_restricted:
+              type: boolean
+            is_siege_protected:
+              type: boolean
+            name:
+              type: string
+              minLength: 1
+            over_18:
+              type: boolean
+            permalink:
+              type: string
+              minLength: 1
+            profile_url:
+              type: string
+              minLength: 1
+          required:
+            - banner_url
+            - color
+            - created_utc
+            - description
+            - description_html
+            - fullname
+            - id
+            - is_banned
+            - is_private
+            - is_restricted
+            - is_siege_protected
+            - name
+            - over_18
+            - permalink
+            - profile_url
+        id:
+          type: string
+          minLength: 1
+        is_archived:
+          type: boolean
+        is_banned:
+          type: boolean
+        is_bot:
+          type: boolean
+        is_deleted:
+          type: boolean
+        is_nsfl:
+          type: boolean
+        is_nsfw:
+          type: boolean
+        is_offensive:
+          type: boolean
+        level:
+          type: number
+        permalink:
+          type: string
+          minLength: 1
+        post:
+          type: object
+          properties:
+            author_name:
+              type: string
+              minLength: 1
+            award_count:
+              type: number
+            body:
+              type: string
+              minLength: 1
+            body_html:
+              type: string
+              minLength: 1
+            comment_count:
+              type: number
+            created_utc:
+              type: number
+            domain:
+              type: string
+              minLength: 1
+            downvotes:
+              type: number
+            edited_utc:
+              type: number
+            fullname:
+              type: string
+              minLength: 1
+            guild_name:
+              type: string
+              minLength: 1
+            id:
+              type: string
+              minLength: 1
+            is_archived:
+              type: boolean
+            is_banned:
+              type: boolean
+            is_deleted:
+              type: boolean
+            is_nsfl:
+              type: boolean
+            is_nsfw:
+              type: boolean
+            is_offensive:
+              type: boolean
+            is_politics:
+              type: boolean
+            original_guild_name: {}
+            permalink:
+              type: string
+              minLength: 1
+            score:
+              type: number
+            thumb_url: {}
+            title:
+              type: string
+              minLength: 1
+            upvotes:
+              type: number
+            url:
+              type: string
+          required:
+            - author_name
+            - award_count
+            - body
+            - body_html
+            - comment_count
+            - created_utc
+            - domain
+            - downvotes
+            - edited_utc
+            - fullname
+            - guild_name
+            - id
+            - is_archived
+            - is_banned
+            - is_deleted
+            - is_nsfl
+            - is_nsfw
+            - is_offensive
+            - is_politics
+            - permalink
+            - score
+            - title
+            - upvotes
+            - url
+        post_id:
+          type: string
+          minLength: 1
+        score:
+          type: number
+        upvotes:
+          type: number
+      required:
+        - author
+        - author_name
+        - award_count
+        - body
+        - body_html
+        - created_utc
+        - downvotes
+        - edited_utc
+        - fullname
+        - guild
+        - id
+        - is_archived
+        - is_banned
+        - is_bot
+        - is_deleted
+        - is_nsfl
+        - is_nsfw
+        - is_offensive
+        - level
+        - permalink
+        - post
+        - post_id
+        - score
+        - upvotes
+      x-examples:
+        example:
+          author:
+            banner_url: 'https://i.ruqqus.com/users/foreverzer0/banner-3.png'
+            bio: ''
+            bio_html: ''
+            created_utc: 1592359144
+            id: 6uo
+            is_banned: false
+            is_premium: false
+            is_private: true
+            permalink: /@foreverzer0
+            profile_url: 'https://i.ruqqus.com/users/foreverzer0/profile-2.png'
+            title:
+              color: '#5555dd'
+              id: 22
+              kind: 1
+              text: ' the Likeable'
+            username: foreverzer0
+          author_name: foreverzer0
+          award_count: 0
+          body: this is a test body
+          body_html: |
+            <p>this is a test body</p>
+          created_utc: 1599226564
+          downvotes: 0
+          edited_utc: 0
+          fullname: t3_aa59
+          guild:
+            banner_url: 'https://i.ruqqus.com/board/ruqqusapi/banner-3.png'
+            color: '#2A96F3'
+            created_utc: 1598948139
+            description: 'A place to discuss Ruqqus API, ask questions and post "500 (Internal server error)" memes'
+            description_html: |
+              <p>A place to discuss Ruqqus API, ask questions and post "500 (Internal server error)" memes</p>
+            fullname: t4_3my
+            id: 3my
+            is_banned: false
+            is_private: false
+            is_restricted: false
+            is_siege_protected: false
+            name: RuqqusAPI
+            over_18: false
+            permalink: /+RuqqusAPI
+            profile_url: 'https://i.ruqqus.com/board/ruqqusapi/profile-2.png'
+          id: aa59
+          is_archived: false
+          is_banned: false
+          is_bot: false
+          is_deleted: false
+          is_nsfl: false
+          is_nsfw: false
+          is_offensive: false
+          level: 1
+          permalink: /+RuqqusAPI/post/2v0b/how-to-get-started-using-ruqqus/aa59
+          post:
+            author_name: movie
+            award_count: 0
+            body: "Currently there is no official documentation for Ruqqus API but there is unofficial one by @SuperLeaf1995  https://ruqq.us/36v6, and there is a help page on how to get started with the api: https://ruqqus.com/help/oauth   \r\n\r\nYou can search through [Ruqqus's GitHub page](https://github.com/ruqqus/ruqqus) to find all of the routes.  \r\n\r\nMore specifically: https://github.com/ruqqus/ruqqus/tree/master/ruqqus/routes    \r\n\r\n<hr>   \r\n\r\nIf you wan't to get started making bots check out [ruqqus-js](https://www.npmjs.com/package/ruqqus-js) by @acikek  \r\nIf you are having trouble getting `access token` check out [AutoAuth for ruqqus](https://ruqqus-auth.glitch.me)\r\n\r\n"
+            body_html: |
+              <p>Currently there is no official documentation for Ruqqus API but there is unofficial one by <a href="/@SuperLeaf1995"><img class="profile-pic-20 mr-1" src="/@SuperLeaf1995/pic/profile"/>@SuperLeaf1995</a> <a href="https://ruqq.us/36v6">https://ruqq.us/36v6</a>, and there is a help page on how to get started with the api: <a href="https://ruqqus.com/help/oauth">https://ruqqus.com/help/oauth</a></p>
+              <p>You can search through <a href="https://github.com/ruqqus/ruqqus" rel="nofollow noopener" target="_blank">Ruqqus's GitHub page</a> to find all of the routes.</p>
+              <p>More specifically: <a href="https://github.com/ruqqus/ruqqus/tree/master/ruqqus/routes" rel="nofollow noopener" target="_blank">https://github.com/ruqqus/ruqqus/tree/master/ruqqus/routes</a></p>
+              <hr/>
+              <p>If you wan't to get started making bots check out <a href="https://www.npmjs.com/package/ruqqus-js" rel="nofollow noopener" target="_blank">ruqqus-js</a> by <a href="/@acikek"><img class="profile-pic-20 mr-1" src="/@acikek/pic/profile"/>@acikek</a>  
+              If you are having trouble getting <code>access token</code> check out <a href="https://ruqqus-auth.glitch.me" rel="nofollow noopener" target="_blank">AutoAuth for ruqqus</a></p>
+            comment_count: 7
+            created_utc: 1598950552
+            domain: text post
+            downvotes: 0
+            edited_utc: 1605778377
+            fullname: t2_2v0b
+            guild_name: RuqqusAPI
+            id: 2v0b
+            is_archived: false
+            is_banned: false
+            is_deleted: false
+            is_nsfl: false
+            is_nsfw: false
+            is_offensive: false
+            is_politics: false
+            original_guild_name: null
+            permalink: /+RuqqusAPI/post/2v0b/how-to-get-started-using-ruqqus
+            score: 9
+            thumb_url: null
+            title: How to get started using Ruqqus API
+            upvotes: 9
+            url: ''
+          post_id: 2v0b
+          score: 4
+          upvotes: 4
+  securitySchemes:
+    OAuth2:
+      type: oauth2
+      flows:
+        authorizationCode:
+          authorizationUrl: ''
+          tokenUrl: ''
+          scopes: {}
+      description: |
+        OAuth2 flow for obtaining API application keys
+
+        Go to https://ruqqus.com/help/oauth to see official documentation on that
+    Token:
+      type: apiKey
+      in: header
+      name: Bearer Token
+      description: |
+        Token for accessing `/api/v1` endpoint
+    API Key - 1:
+      name: API Key
+      type: apiKey
+      in: query
+  responses:
+    401-Not-Authorized:
+      description: '401'
+      content:
+        application/json:
+          schema:
+            description: ''
+            type: object
+            properties:
+              error:
+                type: string
+                minLength: 1
+            required:
+              - error
+          examples:
+            Invalid or Expired Token:
+              value:
+                error: 401 Not Authorized. Invalid or Expired Token
+            Scope required:
+              value:
+                error: 401 Not Authorized. Scope missing_scope is required.
+    403-Forbidden:
+      description: '403'
+      content:
+        application/json:
+          schema:
+            description: ''
+            type: object
+            properties:
+              error:
+                type: string
+                minLength: 1
+            required:
+              - error
+          examples:
+            Account suspended:
+              value:
+                error: 403 Forbidden. The user account is suspended.
+            App suspended:
+              value:
+                error: 403 Forbidden. The application app_name is suspended.
+security:
+  - OAuth2: []
+  - Token: []
