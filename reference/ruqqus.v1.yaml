@@ -1563,10 +1563,11 @@ paths:
                 Invalid post ID:
                   value:
                     error: invalid post id
-      description: |-
+      description: |
         Endpoint for yanking posts
-
-        Requires scope: `guildmaster`
+      security:
+        - OAuth2:
+            - guildmaster
 components:
   schemas:
     User:
