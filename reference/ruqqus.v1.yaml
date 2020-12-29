@@ -1948,6 +1948,506 @@ paths:
         in: path
         required: true
         description: Guild name
+  'comment/{c_id}':
+    get:
+      summary: comment/<c_id>
+      tags: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                description: ''
+                type: object
+                properties:
+                  author:
+                    type: object
+                    properties:
+                      banner_url:
+                        type: string
+                        minLength: 1
+                      bio:
+                        type: string
+                      bio_html:
+                        type: string
+                      created_utc:
+                        type: number
+                      id:
+                        type: string
+                        minLength: 1
+                      is_banned:
+                        type: boolean
+                      is_premium:
+                        type: boolean
+                      is_private:
+                        type: boolean
+                      permalink:
+                        type: string
+                        minLength: 1
+                      profile_url:
+                        type: string
+                        minLength: 1
+                      title:
+                        type: object
+                        properties:
+                          color:
+                            type: string
+                            minLength: 1
+                          id:
+                            type: number
+                          kind:
+                            type: number
+                          text:
+                            type: string
+                            minLength: 1
+                        required:
+                          - color
+                          - id
+                          - kind
+                          - text
+                      username:
+                        type: string
+                        minLength: 1
+                    required:
+                      - banner_url
+                      - bio
+                      - bio_html
+                      - created_utc
+                      - id
+                      - is_banned
+                      - is_premium
+                      - is_private
+                      - permalink
+                      - profile_url
+                      - title
+                      - username
+                  author_name:
+                    type: string
+                    minLength: 1
+                  award_count:
+                    type: number
+                  body:
+                    type: string
+                    minLength: 1
+                  body_html:
+                    type: string
+                    minLength: 1
+                  created_utc:
+                    type: number
+                  downvotes:
+                    type: number
+                  edited_utc:
+                    type: number
+                  fullname:
+                    type: string
+                    minLength: 1
+                  guild:
+                    type: object
+                    properties:
+                      banner_url:
+                        type: string
+                        minLength: 1
+                      color:
+                        type: string
+                        minLength: 1
+                      created_utc:
+                        type: number
+                      description:
+                        type: string
+                        minLength: 1
+                      description_html:
+                        type: string
+                        minLength: 1
+                      fullname:
+                        type: string
+                        minLength: 1
+                      id:
+                        type: string
+                        minLength: 1
+                      is_banned:
+                        type: boolean
+                      is_private:
+                        type: boolean
+                      is_restricted:
+                        type: boolean
+                      is_siege_protected:
+                        type: boolean
+                      name:
+                        type: string
+                        minLength: 1
+                      over_18:
+                        type: boolean
+                      permalink:
+                        type: string
+                        minLength: 1
+                      profile_url:
+                        type: string
+                        minLength: 1
+                    required:
+                      - banner_url
+                      - color
+                      - created_utc
+                      - description
+                      - description_html
+                      - fullname
+                      - id
+                      - is_banned
+                      - is_private
+                      - is_restricted
+                      - is_siege_protected
+                      - name
+                      - over_18
+                      - permalink
+                      - profile_url
+                  id:
+                    type: string
+                    minLength: 1
+                  is_archived:
+                    type: boolean
+                  is_banned:
+                    type: boolean
+                  is_bot:
+                    type: boolean
+                  is_deleted:
+                    type: boolean
+                  is_nsfl:
+                    type: boolean
+                  is_nsfw:
+                    type: boolean
+                  is_offensive:
+                    type: boolean
+                  level:
+                    type: number
+                  permalink:
+                    type: string
+                    minLength: 1
+                  post:
+                    type: object
+                    properties:
+                      author_name:
+                        type: string
+                        minLength: 1
+                      award_count:
+                        type: number
+                      body:
+                        type: string
+                        minLength: 1
+                      body_html:
+                        type: string
+                        minLength: 1
+                      comment_count:
+                        type: number
+                      created_utc:
+                        type: number
+                      domain:
+                        type: string
+                        minLength: 1
+                      downvotes:
+                        type: number
+                      edited_utc:
+                        type: number
+                      fullname:
+                        type: string
+                        minLength: 1
+                      guild_name:
+                        type: string
+                        minLength: 1
+                      id:
+                        type: string
+                        minLength: 1
+                      is_archived:
+                        type: boolean
+                      is_banned:
+                        type: boolean
+                      is_deleted:
+                        type: boolean
+                      is_nsfl:
+                        type: boolean
+                      is_nsfw:
+                        type: boolean
+                      is_offensive:
+                        type: boolean
+                      is_politics:
+                        type: boolean
+                      original_guild_name: {}
+                      permalink:
+                        type: string
+                        minLength: 1
+                      score:
+                        type: number
+                      thumb_url: {}
+                      title:
+                        type: string
+                        minLength: 1
+                      upvotes:
+                        type: number
+                      url:
+                        type: string
+                    required:
+                      - author_name
+                      - award_count
+                      - body
+                      - body_html
+                      - comment_count
+                      - created_utc
+                      - domain
+                      - downvotes
+                      - edited_utc
+                      - fullname
+                      - guild_name
+                      - id
+                      - is_archived
+                      - is_banned
+                      - is_deleted
+                      - is_nsfl
+                      - is_nsfw
+                      - is_offensive
+                      - is_politics
+                      - permalink
+                      - score
+                      - title
+                      - upvotes
+                      - url
+                  post_id:
+                    type: string
+                    minLength: 1
+                  score:
+                    type: number
+                  upvotes:
+                    type: number
+                required:
+                  - author
+                  - author_name
+                  - award_count
+                  - body
+                  - body_html
+                  - created_utc
+                  - downvotes
+                  - edited_utc
+                  - fullname
+                  - guild
+                  - id
+                  - is_archived
+                  - is_banned
+                  - is_bot
+                  - is_deleted
+                  - is_nsfl
+                  - is_nsfw
+                  - is_offensive
+                  - level
+                  - permalink
+                  - post
+                  - post_id
+                  - score
+                  - upvotes
+              examples:
+                example:
+                  value:
+                    author:
+                      banner_url: 'https://i.ruqqus.com/users/foreverzer0/banner-3.png'
+                      bio: ''
+                      bio_html: ''
+                      created_utc: 1592359144
+                      id: 6uo
+                      is_banned: false
+                      is_premium: false
+                      is_private: true
+                      permalink: /@foreverzer0
+                      profile_url: 'https://i.ruqqus.com/users/foreverzer0/profile-2.png'
+                      title:
+                        color: '#5555dd'
+                        id: 22
+                        kind: 1
+                        text: ' the Likeable'
+                      username: foreverzer0
+                    author_name: foreverzer0
+                    award_count: 0
+                    body: this is a test body
+                    body_html: |
+                      <p>this is a test body</p>
+                    created_utc: 1599226564
+                    downvotes: 0
+                    edited_utc: 0
+                    fullname: t3_aa59
+                    guild:
+                      banner_url: 'https://i.ruqqus.com/board/ruqqusapi/banner-3.png'
+                      color: '#2A96F3'
+                      created_utc: 1598948139
+                      description: 'A place to discuss Ruqqus API, ask questions and post "500 (Internal server error)" memes'
+                      description_html: |
+                        <p>A place to discuss Ruqqus API, ask questions and post "500 (Internal server error)" memes</p>
+                      fullname: t4_3my
+                      id: 3my
+                      is_banned: false
+                      is_private: false
+                      is_restricted: false
+                      is_siege_protected: false
+                      name: RuqqusAPI
+                      over_18: false
+                      permalink: /+RuqqusAPI
+                      profile_url: 'https://i.ruqqus.com/board/ruqqusapi/profile-2.png'
+                    id: aa59
+                    is_archived: false
+                    is_banned: false
+                    is_bot: false
+                    is_deleted: false
+                    is_nsfl: false
+                    is_nsfw: false
+                    is_offensive: false
+                    level: 1
+                    permalink: /+RuqqusAPI/post/2v0b/how-to-get-started-using-ruqqus/aa59
+                    post:
+                      author_name: movie
+                      award_count: 0
+                      body: "Currently there is no official documentation for Ruqqus API but there is unofficial one by @SuperLeaf1995  https://ruqq.us/36v6, and there is a help page on how to get started with the api: https://ruqqus.com/help/oauth   \r\n\r\nYou can search through [Ruqqus's GitHub page](https://github.com/ruqqus/ruqqus) to find all of the routes.  \r\n\r\nMore specifically: https://github.com/ruqqus/ruqqus/tree/master/ruqqus/routes    \r\n\r\n<hr>   \r\n\r\nIf you wan't to get started making bots check out [ruqqus-js](https://www.npmjs.com/package/ruqqus-js) by @acikek  \r\nIf you are having trouble getting `access token` check out [AutoAuth for ruqqus](https://ruqqus-auth.glitch.me)\r\n\r\n"
+                      body_html: |
+                        <p>Currently there is no official documentation for Ruqqus API but there is unofficial one by <a href="/@SuperLeaf1995"><img class="profile-pic-20 mr-1" src="/@SuperLeaf1995/pic/profile"/>@SuperLeaf1995</a> <a href="https://ruqq.us/36v6">https://ruqq.us/36v6</a>, and there is a help page on how to get started with the api: <a href="https://ruqqus.com/help/oauth">https://ruqqus.com/help/oauth</a></p>
+                        <p>You can search through <a href="https://github.com/ruqqus/ruqqus" rel="nofollow noopener" target="_blank">Ruqqus's GitHub page</a> to find all of the routes.</p>
+                        <p>More specifically: <a href="https://github.com/ruqqus/ruqqus/tree/master/ruqqus/routes" rel="nofollow noopener" target="_blank">https://github.com/ruqqus/ruqqus/tree/master/ruqqus/routes</a></p>
+                        <hr/>
+                        <p>If you wan't to get started making bots check out <a href="https://www.npmjs.com/package/ruqqus-js" rel="nofollow noopener" target="_blank">ruqqus-js</a> by <a href="/@acikek"><img class="profile-pic-20 mr-1" src="/@acikek/pic/profile"/>@acikek</a>  
+                        If you are having trouble getting <code>access token</code> check out <a href="https://ruqqus-auth.glitch.me" rel="nofollow noopener" target="_blank">AutoAuth for ruqqus</a></p>
+                      comment_count: 7
+                      created_utc: 1598950552
+                      domain: text post
+                      downvotes: 0
+                      edited_utc: 1605778377
+                      fullname: t2_2v0b
+                      guild_name: RuqqusAPI
+                      id: 2v0b
+                      is_archived: false
+                      is_banned: false
+                      is_deleted: false
+                      is_nsfl: false
+                      is_nsfw: false
+                      is_offensive: false
+                      is_politics: false
+                      original_guild_name: null
+                      permalink: /+RuqqusAPI/post/2v0b/how-to-get-started-using-ruqqus
+                      score: 9
+                      thumb_url: null
+                      title: How to get started using Ruqqus API
+                      upvotes: 9
+                      url: ''
+                    post_id: 2v0b
+                    score: 4
+                    upvotes: 4
+                Guild banned:
+                  value:
+                    error: '+{board.name} is banned.'
+                NSFW:
+                  value:
+                    error: This content is not suitable for some users and situations.
+                NSFL:
+                  value:
+                    error: This content is not suitable for some users and situations.
+                example-5:
+                  value:
+                    author:
+                      banner_url: string
+                      bio: string
+                      bio_html: string
+                      created_utc: 0
+                      id: string
+                      is_banned: true
+                      is_premium: true
+                      is_private: true
+                      permalink: string
+                      profile_url: string
+                      title:
+                        color: string
+                        id: 0
+                        kind: 0
+                        text: string
+                      username: string
+                    author_name: string
+                    award_count: 0
+                    body: string
+                    body_html: string
+                    created_utc: 0
+                    downvotes: 0
+                    edited_utc: 0
+                    fullname: string
+                    guild:
+                      banner_url: string
+                      color: string
+                      created_utc: 0
+                      description: string
+                      description_html: string
+                      fullname: string
+                      id: string
+                      is_banned: true
+                      is_private: true
+                      is_restricted: true
+                      is_siege_protected: true
+                      name: string
+                      over_18: true
+                      permalink: string
+                      profile_url: string
+                    id: string
+                    is_archived: true
+                    is_banned: true
+                    is_bot: true
+                    is_deleted: true
+                    is_nsfl: true
+                    is_nsfw: true
+                    is_offensive: true
+                    level: 0
+                    permalink: string
+                    post:
+                      author_name: string
+                      award_count: 0
+                      body: string
+                      body_html: string
+                      comment_count: 0
+                      created_utc: 0
+                      domain: string
+                      downvotes: 0
+                      edited_utc: 0
+                      fullname: string
+                      guild_name: string
+                      id: string
+                      is_archived: true
+                      is_banned: true
+                      is_deleted: true
+                      is_nsfl: true
+                      is_nsfw: true
+                      is_offensive: true
+                      is_politics: true
+                      original_guild_name: null
+                      permalink: string
+                      score: 0
+                      thumb_url: null
+                      title: string
+                      upvotes: 0
+                      url: string
+                    post_id: string
+                    score: 0
+                    upvotes: 0
+      operationId: get-comment-c_id
+      description: Get comment by ID
+      parameters:
+        - schema:
+            type: string
+          in: query
+          name: sort
+          description: 'Sort options: `hot`, `top`, `new`, `disputed`, `random`<br>Default: `hot`'
+    parameters:
+      - schema:
+          type: string
+        name: c_id
+        in: path
+        description: Comment ID
+        required: true
+  comment:
+    parameters: []
+    post:
+      summary: ''
+      operationId: postcomment
+      responses:
+        '200':
+          description: OK
 components:
   schemas:
     User:
