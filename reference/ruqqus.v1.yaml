@@ -1502,6 +1502,50 @@ paths:
                 Guild Recent yank:
                   value:
                     error: +guild_name has yanked a post recently. The Guild needs to wait 1 hour between yanks.
+                Missing scope:
+                  value:
+                    error: '401 Not Authorized. Scope `{scope}` is required.'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                description: ''
+                type: object
+                properties:
+                  error:
+                    type: string
+                    minLength: 1
+                required:
+                  - error
+              examples:
+                App suspended:
+                  value:
+                    error: '403 Forbidden. The application `{client.application.app_name}` is suspended.'
+                User suspended:
+                  value:
+                    error: 403 Forbidden. The user account is suspended.
+                Guild banned:
+                  value:
+                    error: '+{board.name} is banned. You can''t yank anything there.'
+                Not in +general:
+                  value:
+                    error: This post is no longer in +general
+                Not a GM:
+                  value:
+                    error: 'You are no longer a guildmaster of +{board.name}'
+                User exiled:
+                  value:
+                    error: '@{post.author.username} is exiled from +{board.name}, so you can''t yank their post there.'
+                Can't yank from user:
+                  value:
+                    error: 'You can''t yank @{post.author.username}''s content.'
+                'Can''t yank ':
+                  value:
+                    error: 'You can''t yank this particular post to +{board.name}.'
+                Guild private:
+                  value:
+                    error: '+{board.name} is private, so you can only yank content that started there.'
         '404':
           description: Not Found
           content:
