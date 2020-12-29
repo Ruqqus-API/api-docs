@@ -1568,6 +1568,386 @@ paths:
       security:
         - OAuth2:
             - guildmaster
+  'guild/{boardname}/comments/':
+    get:
+      summary: Your GET endpoint
+      tags: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                description: ''
+                type: object
+                properties:
+                  data:
+                    type: array
+                    uniqueItems: true
+                    minItems: 1
+                    items:
+                      required:
+                        - author_name
+                        - award_count
+                        - body
+                        - body_html
+                        - created_utc
+                        - downvotes
+                        - edited_utc
+                        - fullname
+                        - id
+                        - is_archived
+                        - is_banned
+                        - is_bot
+                        - is_deleted
+                        - is_nsfl
+                        - is_nsfw
+                        - is_offensive
+                        - level
+                        - permalink
+                        - post_id
+                        - score
+                        - upvotes
+                      properties:
+                        author:
+                          type: object
+                          properties:
+                            banner_url:
+                              type: string
+                              minLength: 1
+                            bio:
+                              type: string
+                            bio_html:
+                              type: string
+                            created_utc:
+                              type: number
+                            id:
+                              type: string
+                              minLength: 1
+                            is_banned:
+                              type: boolean
+                            is_premium:
+                              type: boolean
+                            is_private:
+                              type: boolean
+                            permalink:
+                              type: string
+                              minLength: 1
+                            profile_url:
+                              type: string
+                              minLength: 1
+                            title: {}
+                            username:
+                              type: string
+                              minLength: 1
+                          required:
+                            - banner_url
+                            - bio
+                            - bio_html
+                            - created_utc
+                            - id
+                            - is_banned
+                            - is_premium
+                            - is_private
+                            - permalink
+                            - profile_url
+                            - username
+                        author_name:
+                          type: string
+                          minLength: 1
+                        award_count:
+                          type: number
+                        body:
+                          type: string
+                          minLength: 1
+                        body_html:
+                          type: string
+                          minLength: 1
+                        created_utc:
+                          type: number
+                        downvotes:
+                          type: number
+                        edited_utc:
+                          type: number
+                        fullname:
+                          type: string
+                          minLength: 1
+                        guild:
+                          type: object
+                          properties:
+                            banner_url:
+                              type: string
+                              minLength: 1
+                            color:
+                              type: string
+                              minLength: 1
+                            created_utc:
+                              type: number
+                            description:
+                              type: string
+                              minLength: 1
+                            description_html:
+                              type: string
+                              minLength: 1
+                            fullname:
+                              type: string
+                              minLength: 1
+                            id:
+                              type: string
+                              minLength: 1
+                            is_banned:
+                              type: boolean
+                            is_private:
+                              type: boolean
+                            is_restricted:
+                              type: boolean
+                            is_siege_protected:
+                              type: boolean
+                            name:
+                              type: string
+                              minLength: 1
+                            over_18:
+                              type: boolean
+                            permalink:
+                              type: string
+                              minLength: 1
+                            profile_url:
+                              type: string
+                              minLength: 1
+                          required:
+                            - banner_url
+                            - color
+                            - created_utc
+                            - description
+                            - description_html
+                            - fullname
+                            - id
+                            - is_banned
+                            - is_private
+                            - is_restricted
+                            - is_siege_protected
+                            - name
+                            - over_18
+                            - permalink
+                            - profile_url
+                        id:
+                          type: string
+                          minLength: 1
+                        is_archived:
+                          type: boolean
+                        is_banned:
+                          type: boolean
+                        is_bot:
+                          type: boolean
+                        is_deleted:
+                          type: boolean
+                        is_nsfl:
+                          type: boolean
+                        is_nsfw:
+                          type: boolean
+                        is_offensive:
+                          type: boolean
+                        level:
+                          type: number
+                        parent:
+                          type: object
+                          properties:
+                            author_name:
+                              type: string
+                              minLength: 1
+                            award_count:
+                              type: number
+                            body:
+                              type: string
+                              minLength: 1
+                            body_html:
+                              type: string
+                              minLength: 1
+                            created_utc:
+                              type: number
+                            downvotes:
+                              type: number
+                            edited_utc:
+                              type: number
+                            fullname:
+                              type: string
+                              minLength: 1
+                            id:
+                              type: string
+                              minLength: 1
+                            is_archived:
+                              type: boolean
+                            is_banned:
+                              type: boolean
+                            is_bot:
+                              type: boolean
+                            is_deleted:
+                              type: boolean
+                            is_nsfl:
+                              type: boolean
+                            is_nsfw:
+                              type: boolean
+                            is_offensive:
+                              type: boolean
+                            level:
+                              type: number
+                            parent_comment_id:
+                              type: array
+                              items:
+                                required: []
+                                properties: {}
+                            permalink:
+                              type: string
+                              minLength: 1
+                            post_id:
+                              type: string
+                              minLength: 1
+                            score:
+                              type: number
+                            upvotes:
+                              type: number
+                          required:
+                            - author_name
+                            - award_count
+                            - body
+                            - body_html
+                            - created_utc
+                            - downvotes
+                            - edited_utc
+                            - fullname
+                            - id
+                            - is_archived
+                            - is_banned
+                            - is_bot
+                            - is_deleted
+                            - is_nsfl
+                            - is_nsfw
+                            - is_offensive
+                            - level
+                            - parent_comment_id
+                            - permalink
+                            - post_id
+                            - score
+                            - upvotes
+                        parent_comment_id:
+                          type: array
+                          items:
+                            required: []
+                            properties: {}
+                        permalink:
+                          type: string
+                          minLength: 1
+                        post:
+                          type: object
+                          properties:
+                            author_name:
+                              type: string
+                              minLength: 1
+                            award_count:
+                              type: number
+                            body:
+                              type: string
+                            body_html:
+                              type: string
+                            comment_count:
+                              type: number
+                            created_utc:
+                              type: number
+                            domain:
+                              type: string
+                              minLength: 1
+                            downvotes:
+                              type: number
+                            edited_utc:
+                              type: number
+                            fullname:
+                              type: string
+                              minLength: 1
+                            guild_name:
+                              type: string
+                              minLength: 1
+                            id:
+                              type: string
+                              minLength: 1
+                            is_archived:
+                              type: boolean
+                            is_banned:
+                              type: boolean
+                            is_deleted:
+                              type: boolean
+                            is_nsfl:
+                              type: boolean
+                            is_nsfw:
+                              type: boolean
+                            is_offensive:
+                              type: boolean
+                            is_politics:
+                              type: boolean
+                            original_guild_name: {}
+                            permalink:
+                              type: string
+                              minLength: 1
+                            score:
+                              type: number
+                            thumb_url:
+                              type: string
+                              minLength: 1
+                            title:
+                              type: string
+                              minLength: 1
+                            upvotes:
+                              type: number
+                            url:
+                              type: string
+                              minLength: 1
+                          required:
+                            - author_name
+                            - award_count
+                            - body
+                            - body_html
+                            - comment_count
+                            - created_utc
+                            - domain
+                            - downvotes
+                            - edited_utc
+                            - fullname
+                            - guild_name
+                            - id
+                            - is_archived
+                            - is_banned
+                            - is_deleted
+                            - is_nsfl
+                            - is_nsfw
+                            - is_offensive
+                            - is_politics
+                            - permalink
+                            - score
+                            - thumb_url
+                            - title
+                            - upvotes
+                            - url
+                        post_id:
+                          type: string
+                          minLength: 1
+                        score:
+                          type: number
+                        upvotes:
+                          type: number
+                required:
+                  - data
+              examples: {}
+      operationId: get-guild-boardname-comments
+      description: ''
+      security:
+        - OAuth2:
+            - read
+    parameters:
+      - schema:
+          type: string
+        name: boardname
+        in: path
+        required: true
+        description: Guild name
 components:
   schemas:
     User:
