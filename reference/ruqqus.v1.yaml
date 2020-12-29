@@ -1459,6 +1459,24 @@ paths:
         name: name
         in: path
         required: true
+  '/mod/take/{pid}':
+    parameters:
+      - schema:
+          type: string
+        name: pid
+        in: path
+        required: true
+        description: Post ID
+    post:
+      summary: ''
+      operationId: post-mod-take-pid
+      responses:
+        '200':
+          description: OK
+      description: |-
+        Endpoint for yanking posts
+
+        Requires scope: `guildmaster`
 components:
   schemas:
     User:
