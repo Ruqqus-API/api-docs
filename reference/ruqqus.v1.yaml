@@ -1977,6 +1977,8 @@ paths:
         - OAuth2:
             - update
         - Access Token: []
+    get:
+      summary: Toggle post NSFW
 components:
   schemas:
     User:
