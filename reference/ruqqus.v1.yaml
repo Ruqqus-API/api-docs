@@ -2447,9 +2447,90 @@ paths:
       responses:
         '200':
           description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Comment'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+              examples:
+                Not an image:
+                  value:
+                    error: That wasn't an image!
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+              examples:
+                Malicious content:
+                  value:
+                    error: Digitally malicious content is not allowed.
+                Deleted:
+                  value:
+                    error: You can't comment on things that have been deleted
+                Can't comment:
+                  value:
+                    error: You can't comment on this.
+                Spam:
+                  value:
+                    error: Too much spam!
+                Bad link:
+                  value:
+                    error: 'Remove the following link and try again: `{check_url}`. Reason: {badlink.reason_text}'
+        '409':
+          description: Conflict
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+              examples:
+                Existing comment:
+                  value:
+                    error: 'You already made that comment: {existing.permalink}'
       security:
         - OAuth2:
             - create
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                parent_fullname:
+                  description: 'Parent comment/post ID. Prepend t2_ if post, t3_ if comment'
+                  type:
+                    - object
+                    - string
+                image:
+                  type: 'null'
+                  description: Image file (requires premium)
+                body:
+                  type: string
+                  minLength: 0
+                  maxLength: 10000
+                  description: Comment body
+              required:
+                - parent_fullname
+                - body
+            examples: {}
+          application/json:
+            examples: {}
+        description: ''
 components:
   schemas:
     User:
