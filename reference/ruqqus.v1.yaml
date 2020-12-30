@@ -1798,7 +1798,6 @@ paths:
         - Access Token: []
       parameters:
         - $ref: '#/components/parameters/sort-comments'
-        - $ref: '#/components/parameters/sort-comments'
     parameters:
       - schema:
           type: string
