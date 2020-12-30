@@ -1504,6 +1504,10 @@ paths:
                 NSFL:
                   value:
                     error: This content is not suitable for some users and situations.
+        '401':
+          $ref: '#/components/responses/401-Not-Authorized'
+        '403':
+          $ref: '#/components/responses/403-Forbidden'
       operationId: get-comment-c_id
       description: Get comment by ID
       parameters: []
@@ -1671,7 +1675,7 @@ paths:
         - $ref: '#/components/parameters/page'
   /all/listing:
     get:
-      summary: Your GET endpoint
+      summary: All page
       tags: []
       responses:
         '200':
@@ -1687,6 +1691,10 @@ paths:
                       - array
                     items:
                       $ref: '#/components/schemas/Post'
+        '401':
+          $ref: '#/components/responses/401-Not-Authorized'
+        '403':
+          $ref: '#/components/responses/403-Forbidden'
       operationId: get-all-listing
       security:
         - OAuth2:
@@ -1696,6 +1704,36 @@ paths:
         - $ref: '#/components/parameters/sort'
         - $ref: '#/components/parameters/time'
         - $ref: '#/components/parameters/ignore_pinned'
+        - $ref: '#/components/parameters/utc_greater_than'
+        - $ref: '#/components/parameters/utc_less_than'
+        - $ref: '#/components/parameters/page'
+        - $ref: '#/components/parameters/cats'
+  /guilds:
+    get:
+      summary: Browse guilds
+      tags: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Guild'
+        '401':
+          $ref: '#/components/responses/401-Not-Authorized'
+        '403':
+          $ref: '#/components/responses/403-Forbidden'
+      operationId: get-guilds
+      security:
+        - OAuth2:
+            - read
+        - Access Token: []
+      parameters:
+        - $ref: '#/components/parameters/page'
+        - $ref: '#/components/parameters/sort-guilds'
+        - $ref: '#/components/parameters/cats'
 components:
   schemas:
     User:
@@ -1931,6 +1969,35 @@ components:
         fullname:
           type: string
           minLength: 1
+        guildmasters:
+          type: array
+          uniqueItems: true
+          minItems: 1
+          items:
+            required:
+              - ban_reason
+              - id
+              - is_banned
+              - is_permanent_ban
+              - permalink
+              - username
+            properties:
+              ban_reason:
+                type: string
+                minLength: 1
+              id:
+                type: string
+                minLength: 1
+              is_banned:
+                type: boolean
+              is_permanent_ban:
+                type: boolean
+              permalink:
+                type: string
+                minLength: 1
+              username:
+                type: string
+                minLength: 1
         id:
           type: string
           minLength: 1
@@ -1953,6 +2020,8 @@ components:
         profile_url:
           type: string
           minLength: 1
+        subscriber_count:
+          type: number
       required:
         - banner_url
         - color
@@ -1960,6 +2029,7 @@ components:
         - description
         - description_html
         - fullname
+        - guildmasters
         - id
         - is_banned
         - is_private
@@ -1969,25 +2039,7 @@ components:
         - over_18
         - permalink
         - profile_url
-      x-examples:
-        example:
-          banner_url: 'https://i.ruqqus.com/board/ruqqusapi/banner-3.png'
-          color: '#2A96F3'
-          created_utc: 1598948139
-          description: 'A place to discuss Ruqqus API, ask questions and post "500 (Internal server error)" memes'
-          description_html: |
-            <p>A place to discuss Ruqqus API, ask questions and post "500 (Internal server error)" memes</p>
-          fullname: t4_3my
-          id: 3my
-          is_banned: false
-          is_private: false
-          is_restricted: false
-          is_siege_protected: false
-          name: RuqqusAPI
-          over_18: false
-          permalink: /+RuqqusAPI
-          profile_url: 'https://i.ruqqus.com/board/ruqqusapi/profile-2.png'
-      title: Guild
+        - subscriber_count
     Post:
       description: ''
       type: object
@@ -2772,6 +2824,25 @@ components:
       schema:
         type: integer
       description: Page
+    cats:
+      name: cats
+      in: query
+      required: false
+      schema:
+        type: number
+      description: Categories
+    sort-guilds:
+      name: sort
+      in: query
+      required: false
+      schema:
+        type: string
+        default: trending
+        enum:
+          - trending
+          - members
+          - new
+      description: Sort  guilds
 security:
   - OAuth2: []
   - Access Token: []
