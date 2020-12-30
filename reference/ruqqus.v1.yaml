@@ -2447,6 +2447,9 @@ paths:
       responses:
         '200':
           description: OK
+      security:
+        - OAuth2:
+            - create
 components:
   schemas:
     User:
@@ -3420,9 +3423,9 @@ components:
     Access Token:
       type: apiKey
       in: header
-      name: Bearer Token
+      name: Authorization
       description: |
-        Token for accessing `/api/v1` endpoints
+        Bearer: Token for accessing `/api/v1` endpoints
   responses:
     401-Not-Authorized:
       description: '401'
