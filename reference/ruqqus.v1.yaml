@@ -1525,7 +1525,7 @@ paths:
   /comment:
     parameters: []
     post:
-      summary: Post comment
+      summary: Submit a comment
       operationId: postcomment
       responses:
         '200':
@@ -1832,6 +1832,27 @@ paths:
         in: path
         required: true
         description: Base 36 ID of a post
+  /submit:
+    post:
+      summary: Submit a post
+      operationId: post-submit
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Post'
+      security:
+        - OAuth2:
+            - create
+        - Access Token: []
+      description: Sumbit a post
+      parameters:
+        - $ref: '#/components/parameters/title'
+        - $ref: '#/components/parameters/board'
+        - $ref: '#/components/parameters/url'
+        - $ref: '#/components/parameters/body'
 components:
   schemas:
     User:
@@ -2953,6 +2974,35 @@ components:
           - new
           - disputed
       description: Sort comments under a post
+    title:
+      name: title
+      in: query
+      required: true
+      schema:
+        type: string
+      description: Post title
+    board:
+      name: board
+      in: query
+      required: false
+      schema:
+        type: string
+        default: general
+      description: Guild
+    url:
+      name: url
+      in: query
+      schema:
+        type: string
+        format: uri
+      description: URL
+    body:
+      name: body
+      in: query
+      required: true
+      schema:
+        type: string
+      description: Submission body
 security:
   - OAuth2: []
   - Access Token: []
