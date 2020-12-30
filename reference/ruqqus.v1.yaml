@@ -2003,6 +2003,25 @@ paths:
             - read
         - Access Token: []
       description: Check if username is available
+  '/user/by_id/{uid}':
+    parameters:
+      - schema:
+          type: string
+        name: uid
+        in: path
+        required: true
+    get:
+      summary: Get user by ID
+      tags: []
+      responses:
+        '302':
+          description: 'Redirects to `/api/v1/user/{user.username}`'
+      operationId: get-user-by_id-uid
+      description: Get user by ID
+      security:
+        - OAuth2:
+            - read
+        - Access Token: []
 components:
   schemas:
     User:
