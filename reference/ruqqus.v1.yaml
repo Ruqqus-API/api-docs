@@ -2545,7 +2545,7 @@ paths:
         required: true
         description: Comment ID
     post:
-      summary: ''
+      summary: Delete comment
       operationId: post-delete-comment-cid
       responses:
         '204':
@@ -2558,8 +2558,6 @@ paths:
       security:
         - OAuth2:
             - delete
-    get:
-      summary: Delete comment
 components:
   schemas:
     User:
