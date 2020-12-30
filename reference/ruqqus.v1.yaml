@@ -1874,6 +1874,8 @@ paths:
                 Bad link:
                   value:
                     error: 'The link `{badlink.link}` is not allowed. Reason: {badlink.reason}'
+        '401':
+          $ref: '#/components/responses/401-Not-Authorized'
         '403':
           description: Forbidden
           content:
@@ -1907,6 +1909,53 @@ paths:
         - $ref: '#/components/parameters/board'
         - $ref: '#/components/parameters/url'
         - $ref: '#/components/parameters/body'
+  '/delete_post/{pid}':
+    post:
+      summary: ''
+      operationId: post-delete_post-pid
+      responses:
+        '204':
+          description: No Content
+        '401':
+          $ref: '#/components/responses/401-Not-Authorized'
+        '403':
+          $ref: '#/components/responses/403-Forbidden'
+      description: Delete a post
+      security:
+        - OAuth2:
+            - delete
+        - Access Token: []
+    parameters:
+      - schema:
+          type: string
+        name: pid
+        in: path
+        required: true
+        description: Post ID
+  '/toggle_post_nsfl/{pid}':
+    post:
+      summary: ''
+      operationId: post-toggle_post_nsfl-pid
+      responses:
+        '204':
+          description: No Content
+        '401':
+          $ref: '#/components/responses/401-Not-Authorized'
+        '403':
+          $ref: '#/components/responses/403-Forbidden'
+      security:
+        - OAuth2:
+            - update
+        - Access Token: []
+    parameters:
+      - schema:
+          type: string
+        name: pid
+        in: path
+        required: true
+        description: Post ID
+    get:
+      summary: Toogle post NSFL
 components:
   schemas:
     User:
