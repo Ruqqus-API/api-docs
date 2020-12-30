@@ -1781,6 +1781,10 @@ paths:
           $ref: '#/components/responses/403-Forbidden'
       operationId: get-identity
       description: Get access token account data
+      security:
+        - OAuth2:
+            - identity
+        - Access Token: []
 components:
   schemas:
     User:
