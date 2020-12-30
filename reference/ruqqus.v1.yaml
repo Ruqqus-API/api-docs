@@ -46,6 +46,10 @@ paths:
                   value:
                     available: true
                     board: ThisNameIsAvailable
+        '401':
+          $ref: '#/components/responses/401-Not-Authorized'
+        '403':
+          $ref: '#/components/responses/403-Forbidden'
       security:
         - OAuth2:
             - read
@@ -1348,6 +1352,7 @@ paths:
       security:
         - OAuth2:
             - guildmaster
+        - Access Token: []
   '/guild/{boardname}/comments':
     get:
       summary: Guild Comment Listing
@@ -1581,6 +1586,7 @@ paths:
       security:
         - OAuth2:
             - create
+        - Access Token: []
       requestBody:
         content:
           multipart/form-data:
@@ -1632,6 +1638,7 @@ paths:
       security:
         - OAuth2:
             - delete
+        - Access Token: []
   /front/listing:
     get:
       summary: Frontpage
@@ -1653,6 +1660,7 @@ paths:
       security:
         - OAuth2:
             - read
+        - Access Token: []
       description: Ruqqus frontpage
       parameters:
         - $ref: '#/components/parameters/sort'
@@ -1660,6 +1668,34 @@ paths:
         - $ref: '#/components/parameters/ignore_pinned'
         - $ref: '#/components/parameters/utc_greater_than'
         - $ref: '#/components/parameters/utc_less_than'
+        - $ref: '#/components/parameters/page'
+  /all/listing:
+    get:
+      summary: Your GET endpoint
+      tags: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type:
+                      - string
+                      - array
+                    items:
+                      $ref: '#/components/schemas/Post'
+      operationId: get-all-listing
+      security:
+        - OAuth2:
+            - read
+        - Access Token: []
+      parameters:
+        - $ref: '#/components/parameters/sort'
+        - $ref: '#/components/parameters/time'
+        - $ref: '#/components/parameters/ignore_pinned'
 components:
   schemas:
     User:
@@ -2730,6 +2766,12 @@ components:
       schema:
         type: integer
         format: int32
+    page:
+      name: page
+      in: query
+      schema:
+        type: integer
+      description: Page
 security:
   - OAuth2: []
   - Access Token: []
