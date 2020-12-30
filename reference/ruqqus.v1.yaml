@@ -1936,7 +1936,7 @@ paths:
                   - data
               examples: {}
       operationId: get-guild-boardname-comments
-      description: ''
+      description: Endpoint for retriving comments from a guild
       security:
         - OAuth2:
             - read
@@ -2439,10 +2439,10 @@ paths:
         in: path
         description: Comment ID
         required: true
-  comment:
+  /comment:
     parameters: []
     post:
-      summary: ''
+      summary: Post comment
       operationId: postcomment
       responses:
         '200':
