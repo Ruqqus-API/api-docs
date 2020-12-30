@@ -1789,7 +1789,34 @@ paths:
     get:
       summary: Post JSON
       tags: []
-      responses: {}
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Post'
+        '401':
+          $ref: '#/components/responses/401-Not-Authorized'
+        '403':
+          $ref: '#/components/responses/403-Forbidden'
+        '451':
+          description: Unavailable For Legal Reasons
+          content:
+            application/json:
+              schema:
+                description: ''
+                type: object
+                properties:
+                  error:
+                    type: string
+                    minLength: 1
+                required:
+                  - error
+              examples:
+                18+:
+                  value:
+                    error: Must be 18+ to view
       operationId: get-post-base36id
       description: Get post data by ID
       security:
