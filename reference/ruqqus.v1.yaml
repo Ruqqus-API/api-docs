@@ -1764,6 +1764,23 @@ paths:
       parameters:
         - $ref: '#/components/parameters/page'
       description: Get all sitewide comments
+  /identity:
+    get:
+      summary: Identity
+      tags: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        '401':
+          $ref: '#/components/responses/401-Not-Authorized'
+        '403':
+          $ref: '#/components/responses/403-Forbidden'
+      operationId: get-identity
+      description: Get access token account data
 components:
   schemas:
     User:
