@@ -1955,6 +1955,28 @@ paths:
         in: path
         required: true
         description: Post ID
+  '/toggle_post_nsfw/{pid}':
+    parameters:
+      - schema:
+          type: string
+        name: pid
+        in: path
+        required: true
+    post:
+      summary: ''
+      operationId: post-toggle_post_nsfw-pid
+      responses:
+        '204':
+          description: No Content
+        '401':
+          $ref: '#/components/responses/401-Not-Authorized'
+        '403':
+          $ref: '#/components/responses/403-Forbidden'
+      description: Toggle NSFW on a post
+      security:
+        - OAuth2:
+            - update
+        - Access Token: []
 components:
   schemas:
     User:
