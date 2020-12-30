@@ -1979,6 +1979,30 @@ paths:
         - Access Token: []
     get:
       summary: Toggle post NSFW
+  '/is_available/{name}':
+    parameters:
+      - schema:
+          type: string
+        name: name
+        in: path
+        required: true
+        description: Account username to check
+    get:
+      summary: Check username availability
+      tags: []
+      responses:
+        '200':
+          description: OK
+        '401':
+          $ref: '#/components/responses/401-Not-Authorized'
+        '403':
+          $ref: '#/components/responses/403-Forbidden'
+      operationId: get-is_available-name
+      security:
+        - OAuth2:
+            - read
+        - Access Token: []
+      description: Check if username is available
 components:
   schemas:
     User:
