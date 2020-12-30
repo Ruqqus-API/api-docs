@@ -2465,7 +2465,9 @@ paths:
                   value:
                     error: That wasn't an image!
         '401':
-          description: Unauthorized
+          $ref: '#/components/responses/401-Not-Authorized'
+        '403':
+          description: Forbidden
           content:
             application/json:
               schema:
@@ -2531,6 +2533,9 @@ paths:
           application/json:
             examples: {}
         description: ''
+      description: |-
+        Post a comment under a post or another comment<br>
+        In `parrent_fullname` prepend `t2_` to post id if commenting on a post, and prepend `t3_` to parent comment id if replying to a comment.
 components:
   schemas:
     User:
