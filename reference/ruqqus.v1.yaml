@@ -1734,6 +1734,36 @@ paths:
         - $ref: '#/components/parameters/page'
         - $ref: '#/components/parameters/sort-guilds'
         - $ref: '#/components/parameters/cats'
+  /front/comments:
+    get:
+      summary: Get comments
+      tags: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type:
+                      - string
+                      - array
+                    items:
+                      $ref: '#/components/schemas/Comment'
+        '401':
+          $ref: '#/components/responses/401-Not-Authorized'
+        '403':
+          $ref: '#/components/responses/403-Forbidden'
+      operationId: get-front-comments
+      security:
+        - OAuth2:
+            - read
+        - Access Token: []
+      parameters:
+        - $ref: '#/components/parameters/page'
+      description: Get all sitewide comments
 components:
   schemas:
     User:
