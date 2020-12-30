@@ -1934,7 +1934,7 @@ paths:
         description: Post ID
   '/toggle_post_nsfl/{pid}':
     post:
-      summary: ''
+      summary: Toggle post NSFL
       operationId: post-toggle_post_nsfl-pid
       responses:
         '204':
@@ -1947,6 +1947,7 @@ paths:
         - OAuth2:
             - update
         - Access Token: []
+      description: Toggle NSFL on a post
     parameters:
       - schema:
           type: string
@@ -1954,8 +1955,6 @@ paths:
         in: path
         required: true
         description: Post ID
-    get:
-      summary: Toogle post NSFL
 components:
   schemas:
     User:
