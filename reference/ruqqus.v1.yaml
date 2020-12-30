@@ -1785,6 +1785,27 @@ paths:
         - OAuth2:
             - identity
         - Access Token: []
+  '/post/{base36id}':
+    get:
+      summary: Post JSON
+      tags: []
+      responses: {}
+      operationId: get-post-base36id
+      description: Get post data by ID
+      security:
+        - OAuth2:
+            - read
+        - Access Token: []
+      parameters:
+        - $ref: '#/components/parameters/sort-comments'
+        - $ref: '#/components/parameters/sort-comments'
+    parameters:
+      - schema:
+          type: string
+        name: base36id
+        in: path
+        required: true
+        description: Base 36 ID of a post
 components:
   schemas:
     User:
@@ -2894,6 +2915,18 @@ components:
           - members
           - new
       description: Sort  guilds
+    sort-comments:
+      name: sort
+      in: query
+      required: false
+      schema:
+        type: string
+        default: top
+        enum:
+          - top
+          - new
+          - disputed
+      description: Sort comments under a post
 security:
   - OAuth2: []
   - Access Token: []
