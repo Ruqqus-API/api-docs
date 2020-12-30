@@ -1988,7 +1988,7 @@ paths:
         required: true
         description: Account username to check
     get:
-      summary: Check username availability
+      summary: Username available
       tags: []
       responses:
         '200':
