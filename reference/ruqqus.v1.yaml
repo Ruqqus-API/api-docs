@@ -1843,6 +1843,60 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Post'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+              examples:
+                Bad title:
+                  value:
+                    error: Please enter a better title
+                Title character limit:
+                  value:
+                    error: 500 character limit for titles.
+                URL/body required:
+                  value:
+                    error: '`url` or `body` parameter required.'
+                BAN:
+                  value:
+                    error: Digitally malicious content is not allowed
+                Body character limit:
+                  value:
+                    error: 10000 character limit for text body.
+                URL character limit:
+                  value:
+                    error: 2048 character limit for URLs.
+                Bad link:
+                  value:
+                    error: 'The link `{badlink.link}` is not allowed. Reason: {badlink.reason}'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                description: ''
+                type: object
+                properties:
+                  error:
+                    type: string
+                    minLength: 1
+                required:
+                  - error
+              examples:
+                Guild banned:
+                  value:
+                    error: '403 Forbidden - +{board.name} has been banned.'
+                Exiled:
+                  value:
+                    error: '403 Not Authorized - You are exiled from +{board.name}'
+                Not a contributor:
+                  value:
+                    error: '403 Not Authorized - You are not an approved contributor for +{board.name}'
       security:
         - OAuth2:
             - create
