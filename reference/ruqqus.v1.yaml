@@ -1634,7 +1634,7 @@ paths:
             - delete
   /front/listing:
     get:
-      summary: Your GET endpoint
+      summary: Frontpage
       tags: []
       responses:
         '200':
