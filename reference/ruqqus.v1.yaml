@@ -2022,6 +2022,55 @@ paths:
         - OAuth2:
             - read
         - Access Token: []
+  '/user/{username}/listing':
+    parameters:
+      - schema:
+          type: string
+        name: username
+        in: path
+        required: true
+    get:
+      summary: Users posts
+      tags: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Post'
+              examples:
+                Account banned:
+                  value:
+                    error: That user is banned
+                Account reserved:
+                  value:
+                    error: 'That username is reserved for: {u.reserved}'
+                Account deactivated:
+                  value:
+                    error: That user deactivated their account.
+                Account private:
+                  value:
+                    error: That userpage is private
+                You are blocking:
+                  value:
+                    error: 'You are blocking @{u.username}.'
+                example-6:
+                  value:
+                    error: This person is blocking you.
+        '401':
+          $ref: '#/components/responses/401-Not-Authorized'
+        '403':
+          $ref: '#/components/responses/403-Forbidden'
+      operationId: get-user-username-listing
+      security:
+        - OAuth2:
+            - read
+        - Access Token: []
+      parameters:
+        - $ref: '#/components/parameters/page'
 components:
   schemas:
     User:
