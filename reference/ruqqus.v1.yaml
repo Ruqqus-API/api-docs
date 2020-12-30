@@ -11,11 +11,11 @@ info:
     name: Mozilla Public License 2.0
     url: 'https://github.com/ruqqus/ruqqus/blob/master/LICENSE'
 servers:
-  - url: 'https://ruqqus.com/api/v1/'
+  - url: 'https://ruqqus.com/api/v1'
 paths:
-  'board_available/{name}':
+  '/board_available/{name}':
     get:
-      summary: 'board_available/{name}'
+      summary: Guild Name Available
       tags: []
       operationId: get-board_available-name
       description: Checks if the guild name is availabile (not an existing guild)
@@ -60,9 +60,9 @@ paths:
         in: path
         description: Guild name
         required: true
-  'guild/{name}/listing':
+  '/guild/{name}/listing':
     get:
-      summary: 'guild/{name}/listing'
+      summary: Guild Post Listing
       tags: []
       operationId: get-api-v1-guild-name-listing
       description: ''
@@ -1464,8 +1464,9 @@ paths:
           type: string
         name: name
         in: path
+        description: Guild name
         required: true
-  'mod/take/{pid}':
+  '/mod/take/{pid}':
     parameters:
       - schema:
           type: string
@@ -1474,7 +1475,7 @@ paths:
         required: true
         description: Post ID
     post:
-      summary: 'mod/take/{pid}'
+      summary: Yank Post
       operationId: post-mod-take-pid
       responses:
         '200':
@@ -1568,9 +1569,9 @@ paths:
       security:
         - OAuth2:
             - guildmaster
-  'guild/{boardname}/comments/':
+  '/guild/{boardname}/comments':
     get:
-      summary: 'guild/{boardname}/comments/'
+      summary: Guild Comment Listing
       tags: []
       responses:
         '200':
@@ -1948,9 +1949,9 @@ paths:
         in: path
         required: true
         description: Guild name
-  'comment/{c_id}':
+  '/comment/{c_id}':
     get:
-      summary: comment/<c_id>
+      summary: Comment JSON
       tags: []
       responses:
         '200':
