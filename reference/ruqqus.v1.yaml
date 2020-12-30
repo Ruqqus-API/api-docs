@@ -2536,6 +2536,30 @@ paths:
       description: |-
         Post a comment under a post or another comment<br>
         In `parrent_fullname` prepend `t2_` to post id if commenting on a post, and prepend `t3_` to parent comment id if replying to a comment.
+  '/delete/comment/{cid}':
+    parameters:
+      - schema:
+          type: string
+        name: cid
+        in: path
+        required: true
+        description: Comment ID
+    post:
+      summary: ''
+      operationId: post-delete-comment-cid
+      responses:
+        '204':
+          description: No Content
+        '401':
+          $ref: '#/components/responses/401-Not-Authorized'
+        '403':
+          $ref: '#/components/responses/403-Forbidden'
+      description: Delete a comment by ID
+      security:
+        - OAuth2:
+            - delete
+    get:
+      summary: Delete comment
 components:
   schemas:
     User:
