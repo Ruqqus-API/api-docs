@@ -46,13 +46,10 @@ paths:
                   value:
                     available: true
                     board: ThisNameIsAvailable
-        '401':
-          $ref: '#/components/responses/401-Not-Authorized'
-        '403':
-          $ref: '#/components/responses/403-Forbidden'
       security:
         - OAuth2:
             - read
+        - Access Token: []
     parameters:
       - schema:
           type: string
@@ -1459,6 +1456,7 @@ paths:
       security:
         - OAuth2:
             - read
+        - Access Token: []
     parameters:
       - schema:
           type: string
@@ -1942,6 +1940,7 @@ paths:
       security:
         - OAuth2:
             - read
+        - Access Token: []
     parameters:
       - schema:
           type: string
@@ -2428,12 +2427,11 @@ paths:
                     upvotes: 0
       operationId: get-comment-c_id
       description: Get comment by ID
-      parameters:
-        - schema:
-            type: string
-          in: query
-          name: sort
-          description: 'Sort options: `hot`, `top`, `new`, `disputed`, `random`<br>Default: `hot`'
+      parameters: []
+      security:
+        - OAuth2:
+            - read
+        - Access Token: []
     parameters:
       - schema:
           type: string
@@ -3424,7 +3422,7 @@ components:
       in: header
       name: Bearer Token
       description: |
-        Token for accessing `/api/v1` endpoint
+        Token for accessing `/api/v1` endpoints
   responses:
     401-Not-Authorized:
       description: '401'
