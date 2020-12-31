@@ -2071,6 +2071,39 @@ paths:
         - Access Token: []
       parameters:
         - $ref: '#/components/parameters/page'
+  '/user/{username}/comments':
+    parameters:
+      - schema:
+          type: string
+        name: username
+        in: path
+        required: true
+        description: Account username
+    get:
+      summary: Get users comments
+      tags: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Comment'
+              examples:
+                Account reserved:
+                  value:
+                    error: 'That username is reserved for: {u.reserved}'
+      operationId: get-user-username-comments
+      description: Get comments for a specific user
+      security:
+        - OAuth2:
+            - read
+        - Access Token: []
 components:
   schemas:
     User:
