@@ -2266,13 +2266,13 @@ paths:
                   error:
                     type: string
               examples:
-                Post removed:
+                Comment removed:
                   value:
                     error: That comment has been removed.
-                Post deleted:
+                Comment deleted:
                   value:
                     error: That comment has been deleted.
-                Post archived:
+                Comment archived:
                   value:
                     error: This comment is archived and can no longer be voted on.
         '423':
