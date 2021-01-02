@@ -2190,7 +2190,7 @@ paths:
         in: path
         required: true
         description: • 1 - upvote  <br>• 0 - remove vote<br>• -1 - downvote
-    get:
+    post:
       summary: Vote on a post
       tags: []
       responses:
