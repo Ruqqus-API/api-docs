@@ -1,3 +1,7 @@
+---
+tags: [guides, guide]
+---
+
 # Create and authorize a Ruqqus Application
 The OAuth2 authorization flow is used to enable users to authorize third-party applications to access their Ruqqus account without having to provide their login information to the application.
 
