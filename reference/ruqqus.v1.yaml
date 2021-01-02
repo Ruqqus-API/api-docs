@@ -1991,6 +1991,29 @@ paths:
       responses:
         '200':
           description: OK
+          content:
+            application/json:
+              schema:
+                description: ''
+                type: object
+                properties:
+                  username:
+                    type: boolean
+                required:
+                  - username
+              examples:
+                kek:
+                  value:
+                    kek: false
+                captainmeta4:
+                  value:
+                    captainmeta4: false
+                arkitekt:
+                  value:
+                    arkitekt: false
+                this_username_is_available:
+                  value:
+                    this_username_is_available: true
         '401':
           $ref: '#/components/responses/401-Not-Authorized'
         '403':
@@ -2055,7 +2078,7 @@ paths:
                 You are blocking:
                   value:
                     error: 'You are blocking @{u.username}.'
-                example-6:
+                Blocked:
                   value:
                     error: This person is blocking you.
         '401':
@@ -2096,6 +2119,25 @@ paths:
                 Account reserved:
                   value:
                     error: 'That username is reserved for: {u.reserved}'
+                Account banned:
+                  value:
+                    error: That user is banned
+                Account deactivated:
+                  value:
+                    error: That user deactivated their account.
+                Account private:
+                  value:
+                    error: That userpage is private
+                You are blocking:
+                  value:
+                    error: 'You are blocking @{u.username}.'
+                You are blocked:
+                  value:
+                    error: This person is blocking you.
+        '401':
+          $ref: '#/components/responses/401-Not-Authorized'
+        '403':
+          $ref: '#/components/responses/403-Forbidden'
       operationId: get-user-username-comments
       description: Get comments for a specific user
       security:
@@ -2694,6 +2736,7 @@ components:
           upvotes: 9
           url: ''
           voted: 1
+      title: ''
     Comment:
       description: ''
       type: object
