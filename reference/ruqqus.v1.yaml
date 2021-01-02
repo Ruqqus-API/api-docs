@@ -3389,8 +3389,8 @@ components:
       in: query
       required: false
       schema:
-        type: number
-      description: Categories
+        type: string
+      description: Comma separated list of numbers
     sort-guilds:
       name: sort
       in: query
