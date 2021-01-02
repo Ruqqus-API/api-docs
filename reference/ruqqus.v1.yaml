@@ -2236,6 +2236,27 @@ paths:
         - OAuth2:
             - vote
         - Access Token: []
+  '/vote/comment/{comment_id}/{x}':
+    parameters:
+      - schema:
+          type: string
+        name: comment_id
+        in: path
+        required: true
+      - schema:
+          type: string
+        name: x
+        in: path
+        required: true
+    post:
+      summary: ''
+      operationId: post-vote-comment-comment_id-x
+      responses:
+        '200':
+          description: OK
+      description: Cast a vote on a comment
+    get:
+      summary: Vote on a comment
 components:
   schemas:
     User:
