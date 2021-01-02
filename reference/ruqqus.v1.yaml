@@ -1385,6 +1385,8 @@ paths:
         - OAuth2:
             - read
         - Access Token: []
+      parameters:
+        - $ref: '#/components/parameters/page'
     parameters:
       - schema:
           type: string
@@ -2144,6 +2146,36 @@ paths:
         - OAuth2:
             - read
         - Access Token: []
+  /saved:
+    get:
+      summary: Saved posts
+      tags: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Post'
+              examples: {}
+        '401':
+          $ref: '#/components/responses/401-Not-Authorized'
+        '403':
+          $ref: '#/components/responses/403-Forbidden'
+      operationId: get-saved
+      security:
+        - OAuth2:
+            - read
+        - Access Token: []
+      parameters:
+        - $ref: '#/components/parameters/page'
+        - $ref: '#/components/parameters/sort'
+      description: Get the list of your saved posts
 components:
   schemas:
     User:
@@ -3180,7 +3212,6 @@ components:
     sort:
       name: sort
       in: query
-      required: false
       schema:
         type: string
         default: hot
