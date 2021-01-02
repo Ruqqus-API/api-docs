@@ -2301,6 +2301,19 @@ paths:
       responses:
         '200':
           description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Post'
+        '401':
+          $ref: '#/components/responses/401-Not-Authorized'
+        '403':
+          $ref: '#/components/responses/403-Forbidden'
       operationId: get-search
       security:
         - OAuth2:
