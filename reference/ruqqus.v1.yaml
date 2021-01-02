@@ -2294,6 +2294,46 @@ paths:
         - OAuth2:
             - vote
         - Access Token: []
+  /search:
+    get:
+      summary: Search
+      tags: []
+      responses:
+        '200':
+          description: OK
+      operationId: get-search
+      security:
+        - OAuth2:
+            - read
+        - Access Token: []
+      parameters:
+        - $ref: '#/components/parameters/time'
+        - $ref: '#/components/parameters/sort'
+        - $ref: '#/components/parameters/page'
+        - $ref: '#/components/parameters/search'
+      description: |-
+        Search posts, +guilds, and @users 
+
+        To search for guilds, put `+` in front of the search query.
+
+        For users put `@`.
+
+        And to search posts with a url use `url:`
+
+        `Remember:` all of these must be URL Encoded 
+
+        <hr>
+
+        Example:
+
+        `.../search?q=%2Bruqqus` - searching guilds with a query `ruqqus` 
+          - `%2B` is `+` URL Encoded
+          
+        `.../search?q=%40cap` - searching users with a query `cap`
+          - `%40` is  `@` URL Encoded
+          
+        `.../search?q=url%3Aexample.com` - searching posts that link to a specific domain/url, query `example.com`  
+          - `%3A` is `:` URL Encoded
 components:
   schemas:
     User:
@@ -3444,6 +3484,13 @@ components:
       schema:
         type: string
       description: Submission body
+    search:
+      name: q
+      in: query
+      required: true
+      schema:
+        type: string
+      description: Search query parameter
 security:
   - OAuth2: []
   - Access Token: []
