@@ -2176,6 +2176,66 @@ paths:
         - $ref: '#/components/parameters/page'
         - $ref: '#/components/parameters/sort'
       description: Get the list of your saved posts
+  '/vote/post/{post_id}/{x}':
+    parameters:
+      - schema:
+          type: string
+        name: post_id
+        in: path
+        required: true
+        description: ID of the post you want to vote on
+      - schema:
+          type: integer
+        name: x
+        in: path
+        required: true
+        description: • 1 - upvote  <br>• 0 - remove vote<br>• -1 - downvote
+    get:
+      summary: Vote on a post
+      tags: []
+      responses:
+        '204':
+          description: No Content
+        '401':
+          $ref: '#/components/responses/401-Not-Authorized'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+              examples:
+                Post removed:
+                  value:
+                    error: That post has been removed.
+                Post deleted:
+                  value:
+                    error: That post has been deleted.
+                Post archived:
+                  value:
+                    error: That post is archived and can no longer be voted on.
+        '423':
+          description: Locked (WebDAV)
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+              examples:
+                Vote already exists:
+                  value:
+                    error: Vote already exists.
+      operationId: get-vote-post-post_id-x
+      description: Cast vote on a post
+      security:
+        - OAuth2:
+            - vote
+        - Access Token: []
 components:
   schemas:
     User:
