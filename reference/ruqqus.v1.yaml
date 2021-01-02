@@ -2255,8 +2255,6 @@ paths:
         '200':
           description: OK
       description: Cast a vote on a comment
-    get:
-      summary: Vote on a comment
 components:
   schemas:
     User:
