@@ -2230,7 +2230,7 @@ paths:
                 Vote already exists:
                   value:
                     error: Vote already exists.
-      operationId: get-vote-post-post_id-x
+      operationId: post-vote-post-post_id-x
       description: Cast vote on a post
       security:
         - OAuth2:
@@ -2249,12 +2249,51 @@ paths:
         in: path
         required: true
     post:
-      summary: ''
-      operationId: post-vote-comment-comment_id-x
+      summary: Vote on a comment
+      tags: []
       responses:
-        '200':
-          description: OK
-      description: Cast a vote on a comment
+        '204':
+          description: No Content
+        '401':
+          $ref: '#/components/responses/401-Not-Authorized'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+              examples:
+                Post removed:
+                  value:
+                    error: That comment has been removed.
+                Post deleted:
+                  value:
+                    error: That comment has been deleted.
+                Post archived:
+                  value:
+                    error: This comment is archived and can no longer be voted on.
+        '423':
+          description: Locked (WebDAV)
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+              examples:
+                Vote already exists:
+                  value:
+                    error: Vote already exists.
+      operationId: post-vote-comment-comment_id-x
+      description: Cast vote on a comment
+      security:
+        - OAuth2:
+            - vote
+        - Access Token: []
 components:
   schemas:
     User:
