@@ -2347,6 +2347,38 @@ paths:
           
         `.../search?q=url%3Aexample.com` - searching posts that link to a specific domain/url, query `example.com`  
           - `%3A` is `:` URL Encoded
+  /release:
+    post:
+      summary: Release Auth
+      operationId: post-release
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                description: ''
+                type: object
+                properties:
+                  message:
+                    type: string
+                    minLength: 1
+                required:
+                  - message
+              examples:
+                example:
+                  value:
+                    message: Authorization released
+        '401':
+          $ref: '#/components/responses/401-Not-Authorized'
+        '403':
+          $ref: '#/components/responses/403-Forbidden'
+        '404':
+          description: Not Found
+      security:
+        - OAuth2: []
+        - Access Token: []
+      description: 'Sets `access_token` as expired, making it invalid'
 components:
   schemas:
     User:
