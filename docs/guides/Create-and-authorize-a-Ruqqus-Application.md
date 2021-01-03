@@ -110,6 +110,24 @@ Make a POST request to https://ruqqus.com/oauth/grant with the following form pa
 - `grant_type` - set to the word "refresh"
 - `refresh_token` - the refresh token which you obtained during Step 3
 
+
+```
+    import requests
+    import pprint
+
+    headers={"User-Agent": "Porpl Reader v1 by @captainmeta4"}
+    url="https://ruqqus.com/oauth/grant"
+    data={"client_id": my_client_id,
+          "client_secret": my_client_secret,
+          "grant_type": "refresh",
+          "refresh_token": my_users_refresh_token
+          }
+
+    r=requests.post(url, headers=headers, data=data)
+
+    pprint.pprint(r.json())
+```
+
 Python example:
 
     import requests
