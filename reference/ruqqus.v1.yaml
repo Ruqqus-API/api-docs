@@ -1,6 +1,6 @@
 openapi: 3.0.0
 info:
-  title: Ruqqus
+  title: Ruqqus API
   version: '1.0'
   description: 'The initial version of the Ruqqus API, in support of user-authorized Applications.'
   termsOfService: 'https://ruqqus.com/help/terms'
