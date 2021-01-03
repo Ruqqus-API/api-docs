@@ -2379,6 +2379,33 @@ paths:
         - OAuth2: []
         - Access Token: []
       description: 'Sets `access_token` as expired, making it invalid'
+  /kill:
+    post:
+      summary: Kill Auth
+      operationId: post-kill
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                description: ''
+                type: object
+                properties:
+                  message:
+                    type: string
+                    minLength: 1
+                required:
+                  - message
+              examples:
+                example:
+                  value:
+                    message: Authorization released
+        '401':
+          $ref: '#/components/responses/401-Not-Authorized'
+        '403':
+          $ref: '#/components/responses/403-Forbidden'
+      description: 'Deletes `access_token` and `refresh_token`, essentially "killing" auth'
 components:
   schemas:
     User:
