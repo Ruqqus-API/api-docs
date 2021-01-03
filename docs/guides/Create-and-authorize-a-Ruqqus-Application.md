@@ -20,7 +20,7 @@ Ruqqus administrators will review and approve or deny your request for API keys.
 
 DO NOT reveal your Client Secret. Anyone with your Client Secret will be able to pretend to be you. You are responsible for keeping your Client Secret a secret!
 
-![](../assets/images/reader.png)
+![](.../assets/images/reader.png)
 
 
 ## Step 2: Prompt Your User for Authorization
@@ -34,7 +34,7 @@ Send your user to https://ruqqus.com/oauth/authorize, with the following URL par
 
 If done correctly, the user will see that your application wants to access their Ruqqus account, and be prompted to approve or deny the request.
 
-![](../assets/images/reader.png)
+![](.../assets/images/reader.png)
 
 
 
